@@ -1,1 +1,10 @@
-test
+﻿.timer {
+	color : red;
+	font-size : 20px;
+}
+
+#askedChordSpan {
+	color : LimeGreen;
+	font-size : 30px;
+	font-weight : bold;
+}
