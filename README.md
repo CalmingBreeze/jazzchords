@@ -7,5 +7,5 @@ Expected functions are :
   - Fully parametrable asking mode (timers, chords asked, ...)
 
 Dev Targets :
-  - Add MIDI Keyboard support
+  - Add basic MIDI Keyboard support
   - Add rythmic and ear-training exercices
