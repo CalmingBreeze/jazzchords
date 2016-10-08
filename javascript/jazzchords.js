@@ -550,6 +550,9 @@ function compute(chord) {
 
 // update the counters (time and remaining questions)
 function refreshQuizzCounters(questionsleft) {
+	//if the test is launched, we need to hide the start button
+	//TO DO : OPTIMIZE : avoid test and UI refresh ? (more test, but avoid 2jqueries by question)
+	
 	//hide the time left before the next question
 	$("#questionTimerBlock").show();
 	$("#solutionTimerBlock").hide();
@@ -561,8 +564,13 @@ function refreshQuizzCounters(questionsleft) {
 	$("#remainingquestion").html(questionsleft);
 }
 
-// start the quizz mode. Called each questions until some remaining.
-function startChordTest() {
+// start the quizz mode. Calling each questions until none remaining.
+function startChordTest(init) {
+	if (init) {
+		$("#askchordbutton").hide();
+		$("#stopchordbutton").show();
+	}	
+	
 	//Refresh the timers and number questions
 	refreshQuizzCounters(chordsleft);
 	
@@ -571,12 +579,30 @@ function startChordTest() {
 		console.log("il reste encore "+chordsleft+" questions.");
 		askChord();
 	} else {
-		alert('Fin du test');
-		//to allow replay reset vars.
-		chordsleft = 20;
-		refreshQuizzCounters(chordsleft);
-		//clear the keyboard
-		if (lastChord.length > 0) { clearKeyboard(lastChord) }
+		stopChordTest();
+	}
+}
+
+// start the quizz mode. Called each questions until some remaining.
+function stopChordTest() {
+	alert('Fin du test');
+	
+	//clear timers 
+	clearInterval(askingChordCountdown);
+	clearTimeout(timerBetweenQuestions);
+	clearInterval(solutionChordCountdown);
+	
+	//Default interface
+	$("#askedChordSpan").html("[AskedChord]");
+	$("#askchordbutton").show();
+	$("#stopchordbutton").hide();
+	
+	//to allow replay reset vars.
+	chordsleft = 20;
+	refreshQuizzCounters(chordsleft);
+	//clear the keyboard
+	if (lastChord.length > 0) { 
+		clearKeyboard(lastChord);
 	}
 }
 
@@ -594,20 +620,20 @@ function askChord() {
 	$("#askedChordSpan").html(askedChord);
 	
 	//Start the countdown to let the user answer	
-	var askingChordCountdown = setInterval(
+	askingChordCountdown = setInterval(
 		function() {
-			console.log("askingChordCountdown timeleft : "+answeringtime);
+			//console.log("askingChordCountdown timeleft : "+answeringtime);
 			if (answeringtime > 0) { 
 				answeringtime -= 1; 
 				$("#anwsertimer").html(answeringtime); 
 			} else {
-				console.log("clearInterval of ASkingtimer");
+				console.log("clearInterval of Askingtimer");
 				clearInterval(askingChordCountdown);
 			}
 		}, 1000);
 	
 	//show the correct answer 5 sec after.
-	setTimeout(
+	timerBetweenQuestions = setTimeout(
 		function() {
 			compute(askedChord);
 			//switch timers
@@ -615,9 +641,9 @@ function askChord() {
 			$("#solutionTimerBlock").show();
 			
 			//start the solution timer
-			var solutionChordCountdown = setInterval(
+			solutionChordCountdown = setInterval(
 				function() {
-					console.log("solutionChordCountdown timeleft : "+solutiontime);
+					//console.log("solutionChordCountdown timeleft : "+solutiontime);
 					if (solutiontime > 0) { 
 						solutiontime -= 1; 
 						$("#solutiontimer").html(solutiontime); 
