@@ -7,74 +7,74 @@ var keys_flats = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B
 var lastChord = [];
 
 //option vars
-var availableChords = ["C/E", "C/G", "C/B", "C/Bb", "C/D", "Cb5", "C5", "C6", "C69", "C7", "C7b5", "C7b9", "C7#5", "C7#9", "C7sus4", "C9", "C9b5", "C9x5", "C9sus4", "Cmaj7", "Cmaj9", "Cmajor",
-"Cminor", "Cm#7", "Cm7", "Cm7b5", "Cm6", "Cm9", "Cmaj9", "Cm11", "Cadd9", "Csus2", "Csus4", "Cdim", "Cdim7", "Caug", "Chalfdim", "C#/F", "C#/G#", "C#/C", "C#/B", "C#/D#", "C#b5", "C#5", "C#6", "C#69", "C#7", "C#7b5", "C#7b9", "C#7#5", "C#7#9", "C#7sus4", "C#9", "C#9b5", "C#9x5", "C#9sus4", "C#maj7", "C#maj9", "C#major",
-"C#minor", "C#m#7", "C#m7", "C#m7b5", "C#m6", "C#m9", "C#maj9", "C#m11", "C#add9", "C#sus2", "C#sus4", "C#dim", "C#dim7", "C#aug", "C#halfdim", "Db/F", "Db/Ab", "Db/C", "Db/B", "Db/Eb", "Dbb5", "Db5", "Db6", "Db69", "Db7", "Db7b5", "Db7b9", "Db7#5", "Db7#9", "Db7sus4", "Db9", "Db9b5", "Db9x5", "Db9sus4", "Dbmaj7", "Dbmaj9", "Dbmajor",
-"Dbminor", "Dbm#7", "Dbm7", "Dbm7b5", "Dbm6", "Dbm9", "Dbmaj9", "Dbm11", "Dbadd9", "Dbsus2", "Dbsus4", "Dbdim", "Dbdim7", "Dbaug", "Dbhalfdim", "D/F#", "D/A", "D/C#", "D/C", "D/E", "Db5", "D5", "D6", "D69", "D7", "D7b5", "D7b9", "D7#5", "D7#9", "D7sus4", "D9", "D9b5", "D9x5", "D9sus4", "Dmaj7", "Dmaj9", "Dmajor",
-"Dminor", "Dm#7", "Dm7", "Dm7b5", "Dm6", "Dm9", "Dmaj9", "Dm11", "Dadd9", "Dsus2", "Dsus4", "Ddim", "Ddim7", "Daug", "Dhalfdim", "D#/G", "D#/A#", "D#/D", "D#/C#", "D#/F", "D#b5", "D#5", "D#6", "D#69", "D#7", "D#7b5", "D#7b9", "D#7#5", "D#7#9", "D#7sus4", "D#9", "D#9b5", "D#9x5", "D#9sus4", "D#maj7", "D#maj9", "D#major",
-"D#minor", "D#m#7", "D#m7", "D#m7b5", "D#m6", "D#m9", "D#maj9", "D#m11", "D#add9", "D#sus2", "D#sus4", "D#dim", "D#dim7", "D#aug", "D#halfdim", "Eb/G", "Eb/Bb", "Eb/D", "Eb/Db", "Eb/F", "Ebb5", "Eb5", "Eb6", "Eb69", "Eb7", "Eb7b5", "Eb7b9", "Eb7#5", "Eb7#9", "Eb7sus4", "Eb9", "Eb9b5", "Eb9x5", "Eb9sus4", "Ebmaj7", "Ebmaj9", "Ebmajor",
-"Ebminor", "Ebm#7", "Ebm7", "Ebm7b5", "Ebm6", "Ebm9", "Ebmaj9", "Ebm11", "Ebadd9", "Ebsus2", "Ebsus4", "Ebdim", "Ebdim7", "Ebaug", "Ebhalfdim", "E/G#", "E/B", "E/D#", "E/D", "E/F#", "Eb5", "E5", "E6", "E69", "E7", "E7b5", "E7b9", "E7#5", "E7#9", "E7sus4", "E9", "E9b5", "E9x5", "E9sus4", "Emaj7", "Emaj9", "Emajor",
-"Eminor", "Em#7", "Em7", "Em7b5", "Em6", "Em9", "Emaj9", "Em11", "Eadd9", "Esus2", "Esus4", "Edim", "Edim7", "Eaug", "Ehalfdim", "F/A", "F/C", "F/E", "F/Eb", "F/G", "Fb5", "F5", "F6", "F69", "F7", "F7b5", "F7b9", "F7#5", "F7#9", "F7sus4", "F9", "F9b5", "F9x5", "F9sus4", "Fmaj7", "Fmaj9", "Fmajor",
-"Fminor", "Fm#7", "Fm7", "Fm7b5", "Fm6", "Fm9", "Fmaj9", "Fm11", "Fadd9", "Fsus2", "Fsus4", "Fdim", "Fdim7", "Faug", "Fhalfdim", "F#/A#", "F#/C#", "F#/F", "F#/E", "F#/G#", "F#b5", "F#5", "F#6", "F#69", "F#7", "F#7b5", "F#7b9", "F#7#5", "F#7#9", "F#7sus4", "F#9", "F#9b5", "F#9x5", "F#9sus4", "F#maj7", "F#maj9", "F#major",
-"F#minor", "F#m#7", "F#m7", "F#m7b5", "F#m6", "F#m9", "F#maj9", "F#m11", "F#add9", "F#sus2", "F#sus4", "F#dim", "F#dim7", "F#aug", "F#halfdim", "Gb/Bb", "Gb/Db", "Gb/F", "Gb/E", "Gb/Ab", "Gbb5", "Gb5", "Gb6", "Gb69", "Gb7", "Gb7b5", "Gb7b9", "Gb7#5", "Gb7#9", "Gb7sus4", "Gb9", "Gb9b5", "Gb9x5", "Gb9sus4", "Gbmaj7", "Gbmaj9", "Gbmajor",
-"Gbminor", "Gbm#7", "Gbm7", "Gbm7b5", "Gbm6", "Gbm9", "Gbmaj9", "Gbm11", "Gbadd9", "Gbsus2", "Gbsus4", "Gbdim", "Gbdim7", "Gbaug", "Gbhalfdim", "G/B", "G/D", "G/F#", "G/F", "G/A", "Gb5", "G5", "G6", "G69", "G7", "G7b5", "G7b9", "G7#5", "G7#9", "G7sus4", "G9", "G9b5", "G9x5", "G9sus4", "Gmaj7", "Gmaj9", "Gmajor",
-"Gminor", "Gm#7", "Gm7", "Gm7b5", "Gm6", "Gm9", "Gmaj9", "Gm11", "Gadd9", "Gsus2", "Gsus4", "Gdim", "Gdim7", "Gaug", "Ghalfdim", "G#/C", "G#/D#", "G#/G", "G#/F#", "G#/A#", "G#b5", "G#5", "G#6", "G#69", "G#7", "G#7b5", "G#7b9", "G#7#5", "G#7#9", "G#7sus4", "G#9", "G#9b5", "G#9x5", "G#9sus4", "G#maj7", "G#maj9", "G#major",
-"G#minor", "G#m#7", "G#m7", "G#m7b5", "G#m6", "G#m9", "G#maj9", "G#m11", "G#add9", "G#sus2", "G#sus4", "G#dim", "G#dim7", "G#aug", "G#halfdim", "Ab/C", "Ab/Eb", "Ab/G", "Ab/Gb", "Ab/Bb", "Abb5", "Ab5", "Ab6", "Ab69", "Ab7", "Ab7b5", "Ab7b9", "Ab7#5", "Ab7#9", "Ab7sus4", "Ab9", "Ab9b5", "Ab9x5", "Ab9sus4", "Abmaj7", "Abmaj9", "Abmajor",
-"Abminor", "Abm#7", "Abm7", "Abm7b5", "Abm6", "Abm9", "Abmaj9", "Abm11", "Abadd9", "Absus2", "Absus4", "Abdim", "Abdim7", "Abaug", "Abhalfdim", "A/C#", "A/E", "A/G#", "A/G", "A/B", "Ab5", "A5", "A6", "A69", "A7", "A7b5", "A7b9", "A7#5", "A7#9", "A7sus4", "A9", "A9b5", "A9x5", "A9sus4", "Amaj7", "Amaj9", "Amajor",
-"Aminor", "Am#7", "Am7", "Am7b5", "Am6", "Am9", "Amaj9", "Am11", "Aadd9", "Asus2", "Asus4", "Adim", "Adim7", "Aaug", "Ahalfdim", "A#/D", "A#/F", "A#/A", "A#/G#", "A#/C", "A#b5", "A#5", "A#6", "A#69", "A#7", "A#7b5", "A#7b9", "A#7#5", "A#7#9", "A#7sus4", "A#9", "A#9b5", "A#9x5", "A#9sus4", "A#maj7", "A#maj9", "A#major",
-"A#minor", "A#m#7", "A#m7", "A#m7b5", "A#m6", "A#m9", "A#maj9", "A#m11", "A#add9", "A#sus2", "A#sus4", "A#dim", "A#dim7", "A#aug", "A#halfdim", "Bb/D", "Bb/F", "Bb/A", "Bb/Ab", "Bb/C", "Bbb5", "Bb5", "Bb6", "Bb69", "Bb7", "Bb7b5", "Bb7b9", "Bb7#5", "Bb7#9", "Bb7sus4", "Bb9", "Bb9b5", "Bb9x5", "Bb9sus4", "Bbmaj7", "Bbmaj9", "Bbmajor",
-"Bbminor", "Bbm#7", "Bbm7", "Bbm7b5", "Bbm6", "Bbm9", "Bbmaj9", "Bbm11", "Bbadd9", "Bbsus2", "Bbsus4", "Bbdim", "Bbdim7", "Bbaug", "Bbhalfdim", "B/D#", "B/F#", "B/A#", "B/A", "B/C#", "Bb5", "B5", "B6", "B69", "B7", "B7b5", "B7b9", "B7#5", "B7#9", "B7sus4", "B9", "B9b5", "B9x5", "B9sus4", "Bmaj7", "Bmaj9", "Bmajor",
+var availableChords = ["C/E", "C/G", "C/B", "C/Bb", "C/D", "Cb5", "C5", "C6", "C69", "C7", "C7b5", "C7b9", "C7#5", "C7#9", "C7sus4", "C9", "C9b5", "C9#5", "C9sus4", "Cmaj7", "Cmaj9", "Cmajor",
+"Cminor", "Cm#7", "Cm7", "Cm7b5", "Cm6", "Cm9", "Cmaj9", "Cm11", "Cadd9", "Csus2", "Csus4", "Cdim", "Cdim7", "Caug", "Chalfdim", "C#/F", "C#/G#", "C#/C", "C#/B", "C#/D#", "C#b5", "C#5", "C#6", "C#69", "C#7", "C#7b5", "C#7b9", "C#7#5", "C#7#9", "C#7sus4", "C#9", "C#9b5", "C#9#5", "C#9sus4", "C#maj7", "C#maj9", "C#major",
+"C#minor", "C#m#7", "C#m7", "C#m7b5", "C#m6", "C#m9", "C#maj9", "C#m11", "C#add9", "C#sus2", "C#sus4", "C#dim", "C#dim7", "C#aug", "C#halfdim", "Db/F", "Db/Ab", "Db/C", "Db/B", "Db/Eb", "Dbb5", "Db5", "Db6", "Db69", "Db7", "Db7b5", "Db7b9", "Db7#5", "Db7#9", "Db7sus4", "Db9", "Db9b5", "Db9#5", "Db9sus4", "Dbmaj7", "Dbmaj9", "Dbmajor",
+"Dbminor", "Dbm#7", "Dbm7", "Dbm7b5", "Dbm6", "Dbm9", "Dbmaj9", "Dbm11", "Dbadd9", "Dbsus2", "Dbsus4", "Dbdim", "Dbdim7", "Dbaug", "Dbhalfdim", "D/F#", "D/A", "D/C#", "D/C", "D/E", "Db5", "D5", "D6", "D69", "D7", "D7b5", "D7b9", "D7#5", "D7#9", "D7sus4", "D9", "D9b5", "D9#5", "D9sus4", "Dmaj7", "Dmaj9", "Dmajor",
+"Dminor", "Dm#7", "Dm7", "Dm7b5", "Dm6", "Dm9", "Dmaj9", "Dm11", "Dadd9", "Dsus2", "Dsus4", "Ddim", "Ddim7", "Daug", "Dhalfdim", "D#/G", "D#/A#", "D#/D", "D#/C#", "D#/F", "D#b5", "D#5", "D#6", "D#69", "D#7", "D#7b5", "D#7b9", "D#7#5", "D#7#9", "D#7sus4", "D#9", "D#9b5", "D#9#5", "D#9sus4", "D#maj7", "D#maj9", "D#major",
+"D#minor", "D#m#7", "D#m7", "D#m7b5", "D#m6", "D#m9", "D#maj9", "D#m11", "D#add9", "D#sus2", "D#sus4", "D#dim", "D#dim7", "D#aug", "D#halfdim", "Eb/G", "Eb/Bb", "Eb/D", "Eb/Db", "Eb/F", "Ebb5", "Eb5", "Eb6", "Eb69", "Eb7", "Eb7b5", "Eb7b9", "Eb7#5", "Eb7#9", "Eb7sus4", "Eb9", "Eb9b5", "Eb9#5", "Eb9sus4", "Ebmaj7", "Ebmaj9", "Ebmajor",
+"Ebminor", "Ebm#7", "Ebm7", "Ebm7b5", "Ebm6", "Ebm9", "Ebmaj9", "Ebm11", "Ebadd9", "Ebsus2", "Ebsus4", "Ebdim", "Ebdim7", "Ebaug", "Ebhalfdim", "E/G#", "E/B", "E/D#", "E/D", "E/F#", "Eb5", "E5", "E6", "E69", "E7", "E7b5", "E7b9", "E7#5", "E7#9", "E7sus4", "E9", "E9b5", "E9#5", "E9sus4", "Emaj7", "Emaj9", "Emajor",
+"Eminor", "Em#7", "Em7", "Em7b5", "Em6", "Em9", "Emaj9", "Em11", "Eadd9", "Esus2", "Esus4", "Edim", "Edim7", "Eaug", "Ehalfdim", "F/A", "F/C", "F/E", "F/Eb", "F/G", "Fb5", "F5", "F6", "F69", "F7", "F7b5", "F7b9", "F7#5", "F7#9", "F7sus4", "F9", "F9b5", "F9#5", "F9sus4", "Fmaj7", "Fmaj9", "Fmajor",
+"Fminor", "Fm#7", "Fm7", "Fm7b5", "Fm6", "Fm9", "Fmaj9", "Fm11", "Fadd9", "Fsus2", "Fsus4", "Fdim", "Fdim7", "Faug", "Fhalfdim", "F#/A#", "F#/C#", "F#/F", "F#/E", "F#/G#", "F#b5", "F#5", "F#6", "F#69", "F#7", "F#7b5", "F#7b9", "F#7#5", "F#7#9", "F#7sus4", "F#9", "F#9b5", "F#9#5", "F#9sus4", "F#maj7", "F#maj9", "F#major",
+"F#minor", "F#m#7", "F#m7", "F#m7b5", "F#m6", "F#m9", "F#maj9", "F#m11", "F#add9", "F#sus2", "F#sus4", "F#dim", "F#dim7", "F#aug", "F#halfdim", "Gb/Bb", "Gb/Db", "Gb/F", "Gb/E", "Gb/Ab", "Gbb5", "Gb5", "Gb6", "Gb69", "Gb7", "Gb7b5", "Gb7b9", "Gb7#5", "Gb7#9", "Gb7sus4", "Gb9", "Gb9b5", "Gb9#5", "Gb9sus4", "Gbmaj7", "Gbmaj9", "Gbmajor",
+"Gbminor", "Gbm#7", "Gbm7", "Gbm7b5", "Gbm6", "Gbm9", "Gbmaj9", "Gbm11", "Gbadd9", "Gbsus2", "Gbsus4", "Gbdim", "Gbdim7", "Gbaug", "Gbhalfdim", "G/B", "G/D", "G/F#", "G/F", "G/A", "Gb5", "G5", "G6", "G69", "G7", "G7b5", "G7b9", "G7#5", "G7#9", "G7sus4", "G9", "G9b5", "G9#5", "G9sus4", "Gmaj7", "Gmaj9", "Gmajor",
+"Gminor", "Gm#7", "Gm7", "Gm7b5", "Gm6", "Gm9", "Gmaj9", "Gm11", "Gadd9", "Gsus2", "Gsus4", "Gdim", "Gdim7", "Gaug", "Ghalfdim", "G#/C", "G#/D#", "G#/G", "G#/F#", "G#/A#", "G#b5", "G#5", "G#6", "G#69", "G#7", "G#7b5", "G#7b9", "G#7#5", "G#7#9", "G#7sus4", "G#9", "G#9b5", "G#9#5", "G#9sus4", "G#maj7", "G#maj9", "G#major",
+"G#minor", "G#m#7", "G#m7", "G#m7b5", "G#m6", "G#m9", "G#maj9", "G#m11", "G#add9", "G#sus2", "G#sus4", "G#dim", "G#dim7", "G#aug", "G#halfdim", "Ab/C", "Ab/Eb", "Ab/G", "Ab/Gb", "Ab/Bb", "Abb5", "Ab5", "Ab6", "Ab69", "Ab7", "Ab7b5", "Ab7b9", "Ab7#5", "Ab7#9", "Ab7sus4", "Ab9", "Ab9b5", "Ab9#5", "Ab9sus4", "Abmaj7", "Abmaj9", "Abmajor",
+"Abminor", "Abm#7", "Abm7", "Abm7b5", "Abm6", "Abm9", "Abmaj9", "Abm11", "Abadd9", "Absus2", "Absus4", "Abdim", "Abdim7", "Abaug", "Abhalfdim", "A/C#", "A/E", "A/G#", "A/G", "A/B", "Ab5", "A5", "A6", "A69", "A7", "A7b5", "A7b9", "A7#5", "A7#9", "A7sus4", "A9", "A9b5", "A9#5", "A9sus4", "Amaj7", "Amaj9", "Amajor",
+"Aminor", "Am#7", "Am7", "Am7b5", "Am6", "Am9", "Amaj9", "Am11", "Aadd9", "Asus2", "Asus4", "Adim", "Adim7", "Aaug", "Ahalfdim", "A#/D", "A#/F", "A#/A", "A#/G#", "A#/C", "A#b5", "A#5", "A#6", "A#69", "A#7", "A#7b5", "A#7b9", "A#7#5", "A#7#9", "A#7sus4", "A#9", "A#9b5", "A#9#5", "A#9sus4", "A#maj7", "A#maj9", "A#major",
+"A#minor", "A#m#7", "A#m7", "A#m7b5", "A#m6", "A#m9", "A#maj9", "A#m11", "A#add9", "A#sus2", "A#sus4", "A#dim", "A#dim7", "A#aug", "A#halfdim", "Bb/D", "Bb/F", "Bb/A", "Bb/Ab", "Bb/C", "Bbb5", "Bb5", "Bb6", "Bb69", "Bb7", "Bb7b5", "Bb7b9", "Bb7#5", "Bb7#9", "Bb7sus4", "Bb9", "Bb9b5", "Bb9#5", "Bb9sus4", "Bbmaj7", "Bbmaj9", "Bbmajor",
+"Bbminor", "Bbm#7", "Bbm7", "Bbm7b5", "Bbm6", "Bbm9", "Bbmaj9", "Bbm11", "Bbadd9", "Bbsus2", "Bbsus4", "Bbdim", "Bbdim7", "Bbaug", "Bbhalfdim", "B/D#", "B/F#", "B/A#", "B/A", "B/C#", "Bb5", "B5", "B6", "B69", "B7", "B7b5", "B7b9", "B7#5", "B7#9", "B7sus4", "B9", "B9b5", "B9#5", "B9sus4", "Bmaj7", "Bmaj9", "Bmajor",
 "Bminor", "Bm#7", "Bm7", "Bm7b5", "Bm6", "Bm9", "Bmaj9", "Bm11", "Badd9", "Bsus2", "Bsus4", "Bdim", "Bdim7", "Baug", "Bhalfdim" ];
 //C
-//"C/E", "C/G", "C/B", "C/Bb", "C/D", "Cb5", "C5", "C6", "C69", "C7", "C7b5", "C7b9", "C7#5", "C7#9", "C7sus4", "C9", "C9b5", "C9x5", "C9sus4", "Cmaj7", "Cmaj9", "Cmajor",
+//"C/E", "C/G", "C/B", "C/Bb", "C/D", "Cb5", "C5", "C6", "C69", "C7", "C7b5", "C7b9", "C7#5", "C7#9", "C7sus4", "C9", "C9b5", "C9#5", "C9sus4", "Cmaj7", "Cmaj9", "Cmajor",
 //"Cminor", "Cm#7", "Cm7", "Cm7b5", "Cm6", "Cm9", "Cmaj9", "Cm11", "Cadd9", "Csus2", "Csus4", "Cdim", "Cdim7", "Caug", "Chalfdim",
 //C#
-//"C#/F", "C#/G#", "C#/C", "C#/B", "C#/D#", "C#b5", "C#5", "C#6", "C#69", "C#7", "C#7b5", "C#7b9", "C#7#5", "C#7#9", "C#7sus4", "C#9", "C#9b5", "C#9x5", "C#9sus4", "C#maj7", "C#maj9", "C#major",
+//"C#/F", "C#/G#", "C#/C", "C#/B", "C#/D#", "C#b5", "C#5", "C#6", "C#69", "C#7", "C#7b5", "C#7b9", "C#7#5", "C#7#9", "C#7sus4", "C#9", "C#9b5", "C#9#5", "C#9sus4", "C#maj7", "C#maj9", "C#major",
 //"C#minor", "C#m#7", "C#m7", "C#m7b5", "C#m6", "C#m9", "C#maj9", "C#m11", "C#add9", "C#sus2", "C#sus4", "C#dim", "C#dim7", "C#aug", "C#halfdim",
 //Db
-//"Db/F", "Db/Ab", "Db/C", "Db/B", "Db/Eb", "Dbb5", "Db5", "Db6", "Db69", "Db7", "Db7b5", "Db7b9", "Db7#5", "Db7#9", "Db7sus4", "Db9", "Db9b5", "Db9x5", "Db9sus4", "Dbmaj7", "Dbmaj9", "Dbmajor",
+//"Db/F", "Db/Ab", "Db/C", "Db/B", "Db/Eb", "Dbb5", "Db5", "Db6", "Db69", "Db7", "Db7b5", "Db7b9", "Db7#5", "Db7#9", "Db7sus4", "Db9", "Db9b5", "Db9#5", "Db9sus4", "Dbmaj7", "Dbmaj9", "Dbmajor",
 //"Dbminor", "Dbm#7", "Dbm7", "Dbm7b5", "Dbm6", "Dbm9", "Dbmaj9", "Dbm11", "Dbadd9", "Dbsus2", "Dbsus4", "Dbdim", "Dbdim7", "Dbaug", "Dbhalfdim",
 //D
-//"D/F#", "D/A", "D/C#", "D/C", "D/E", "Db5", "D5", "D6", "D69", "D7", "D7b5", "D7b9", "D7#5", "D7#9", "D7sus4", "D9", "D9b5", "D9x5", "D9sus4", "Dmaj7", "Dmaj9", "Dmajor",
+//"D/F#", "D/A", "D/C#", "D/C", "D/E", "Db5", "D5", "D6", "D69", "D7", "D7b5", "D7b9", "D7#5", "D7#9", "D7sus4", "D9", "D9b5", "D9#5", "D9sus4", "Dmaj7", "Dmaj9", "Dmajor",
 //"Dminor", "Dm#7", "Dm7", "Dm7b5", "Dm6", "Dm9", "Dmaj9", "Dm11", "Dadd9", "Dsus2", "Dsus4", "Ddim", "Ddim7", "Daug", "Dhalfdim",
 //D#
-//"D#/G", "D#/A#", "D#/D", "D#/C#", "D#/F", "D#b5", "D#5", "D#6", "D#69", "D#7", "D#7b5", "D#7b9", "D#7#5", "D#7#9", "D#7sus4", "D#9", "D#9b5", "D#9x5", "D#9sus4", "D#maj7", "D#maj9", "D#major",
+//"D#/G", "D#/A#", "D#/D", "D#/C#", "D#/F", "D#b5", "D#5", "D#6", "D#69", "D#7", "D#7b5", "D#7b9", "D#7#5", "D#7#9", "D#7sus4", "D#9", "D#9b5", "D#9#5", "D#9sus4", "D#maj7", "D#maj9", "D#major",
 //"D#minor", "D#m#7", "D#m7", "D#m7b5", "D#m6", "D#m9", "D#maj9", "D#m11", "D#add9", "D#sus2", "D#sus4", "D#dim", "D#dim7", "D#aug", "D#halfdim",
 //Eb
-//"Eb/G", "Eb/Bb", "Eb/D", "Eb/Db", "Eb/F", "Ebb5", "Eb5", "Eb6", "Eb69", "Eb7", "Eb7b5", "Eb7b9", "Eb7#5", "Eb7#9", "Eb7sus4", "Eb9", "Eb9b5", "Eb9x5", "Eb9sus4", "Ebmaj7", "Ebmaj9", "Ebmajor",
+//"Eb/G", "Eb/Bb", "Eb/D", "Eb/Db", "Eb/F", "Ebb5", "Eb5", "Eb6", "Eb69", "Eb7", "Eb7b5", "Eb7b9", "Eb7#5", "Eb7#9", "Eb7sus4", "Eb9", "Eb9b5", "Eb9#5", "Eb9sus4", "Ebmaj7", "Ebmaj9", "Ebmajor",
 //"Ebminor", "Ebm#7", "Ebm7", "Ebm7b5", "Ebm6", "Ebm9", "Ebmaj9", "Ebm11", "Ebadd9", "Ebsus2", "Ebsus4", "Ebdim", "Ebdim7", "Ebaug", "Ebhalfdim",
 //E
-//"E/G#", "E/B", "E/D#", "E/D", "E/F#", "Eb5", "E5", "E6", "E69", "E7", "E7b5", "E7b9", "E7#5", "E7#9", "E7sus4", "E9", "E9b5", "E9x5", "E9sus4", "Emaj7", "Emaj9", "Emajor",
+//"E/G#", "E/B", "E/D#", "E/D", "E/F#", "Eb5", "E5", "E6", "E69", "E7", "E7b5", "E7b9", "E7#5", "E7#9", "E7sus4", "E9", "E9b5", "E9#5", "E9sus4", "Emaj7", "Emaj9", "Emajor",
 //"Eminor", "Em#7", "Em7", "Em7b5", "Em6", "Em9", "Emaj9", "Em11", "Eadd9", "Esus2", "Esus4", "Edim", "Edim7", "Eaug", "Ehalfdim",
 //F
-//"F/A", "F/C", "F/E", "F/Eb", "F/G", "Fb5", "F5", "F6", "F69", "F7", "F7b5", "F7b9", "F7#5", "F7#9", "F7sus4", "F9", "F9b5", "F9x5", "F9sus4", "Fmaj7", "Fmaj9", "Fmajor",
+//"F/A", "F/C", "F/E", "F/Eb", "F/G", "Fb5", "F5", "F6", "F69", "F7", "F7b5", "F7b9", "F7#5", "F7#9", "F7sus4", "F9", "F9b5", "F9#5", "F9sus4", "Fmaj7", "Fmaj9", "Fmajor",
 //"Fminor", "Fm#7", "Fm7", "Fm7b5", "Fm6", "Fm9", "Fmaj9", "Fm11", "Fadd9", "Fsus2", "Fsus4", "Fdim", "Fdim7", "Faug", "Fhalfdim",
 //F#
-//"F#/A#", "F#/C#", "F#/F", "F#/E", "F#/G#", "F#b5", "F#5", "F#6", "F#69", "F#7", "F#7b5", "F#7b9", "F#7#5", "F#7#9", "F#7sus4", "F#9", "F#9b5", "F#9x5", "F#9sus4", "F#maj7", "F#maj9", "F#major",
+//"F#/A#", "F#/C#", "F#/F", "F#/E", "F#/G#", "F#b5", "F#5", "F#6", "F#69", "F#7", "F#7b5", "F#7b9", "F#7#5", "F#7#9", "F#7sus4", "F#9", "F#9b5", "F#9#5", "F#9sus4", "F#maj7", "F#maj9", "F#major",
 //"F#minor", "F#m#7", "F#m7", "F#m7b5", "F#m6", "F#m9", "F#maj9", "F#m11", "F#add9", "F#sus2", "F#sus4", "F#dim", "F#dim7", "F#aug", "F#halfdim",
 //Gb
-//"Gb/Bb", "Gb/Db", "Gb/F", "Gb/E", "Gb/Ab", "Gbb5", "Gb5", "Gb6", "Gb69", "Gb7", "Gb7b5", "Gb7b9", "Gb7#5", "Gb7#9", "Gb7sus4", "Gb9", "Gb9b5", "Gb9x5", "Gb9sus4", "Gbmaj7", "Gbmaj9", "Gbmajor",
+//"Gb/Bb", "Gb/Db", "Gb/F", "Gb/E", "Gb/Ab", "Gbb5", "Gb5", "Gb6", "Gb69", "Gb7", "Gb7b5", "Gb7b9", "Gb7#5", "Gb7#9", "Gb7sus4", "Gb9", "Gb9b5", "Gb9#5", "Gb9sus4", "Gbmaj7", "Gbmaj9", "Gbmajor",
 //"Gbminor", "Gbm#7", "Gbm7", "Gbm7b5", "Gbm6", "Gbm9", "Gbmaj9", "Gbm11", "Gbadd9", "Gbsus2", "Gbsus4", "Gbdim", "Gbdim7", "Gbaug", "Gbhalfdim",
 //G
-//"G/B", "G/D", "G/F#", "G/F", "G/A", "Gb5", "G5", "G6", "G69", "G7", "G7b5", "G7b9", "G7#5", "G7#9", "G7sus4", "G9", "G9b5", "G9x5", "G9sus4", "Gmaj7", "Gmaj9", "Gmajor",
+//"G/B", "G/D", "G/F#", "G/F", "G/A", "Gb5", "G5", "G6", "G69", "G7", "G7b5", "G7b9", "G7#5", "G7#9", "G7sus4", "G9", "G9b5", "G9#5", "G9sus4", "Gmaj7", "Gmaj9", "Gmajor",
 //"Gminor", "Gm#7", "Gm7", "Gm7b5", "Gm6", "Gm9", "Gmaj9", "Gm11", "Gadd9", "Gsus2", "Gsus4", "Gdim", "Gdim7", "Gaug", "Ghalfdim",
 //G#
-//"G#/C", "G#/D#", "G#/G", "G#/F#", "G#/A#", "G#b5", "G#5", "G#6", "G#69", "G#7", "G#7b5", "G#7b9", "G#7#5", "G#7#9", "G#7sus4", "G#9", "G#9b5", "G#9x5", "G#9sus4", "G#maj7", "G#maj9", "G#major",
+//"G#/C", "G#/D#", "G#/G", "G#/F#", "G#/A#", "G#b5", "G#5", "G#6", "G#69", "G#7", "G#7b5", "G#7b9", "G#7#5", "G#7#9", "G#7sus4", "G#9", "G#9b5", "G#9#5", "G#9sus4", "G#maj7", "G#maj9", "G#major",
 //"G#minor", "G#m#7", "G#m7", "G#m7b5", "G#m6", "G#m9", "G#maj9", "G#m11", "G#add9", "G#sus2", "G#sus4", "G#dim", "G#dim7", "G#aug", "G#halfdim",
 //Ab
-//"Ab/C", "Ab/Eb", "Ab/G", "Ab/Gb", "Ab/Bb", "Abb5", "Ab5", "Ab6", "Ab69", "Ab7", "Ab7b5", "Ab7b9", "Ab7#5", "Ab7#9", "Ab7sus4", "Ab9", "Ab9b5", "Ab9x5", "Ab9sus4", "Abmaj7", "Abmaj9", "Abmajor",
+//"Ab/C", "Ab/Eb", "Ab/G", "Ab/Gb", "Ab/Bb", "Abb5", "Ab5", "Ab6", "Ab69", "Ab7", "Ab7b5", "Ab7b9", "Ab7#5", "Ab7#9", "Ab7sus4", "Ab9", "Ab9b5", "Ab9#5", "Ab9sus4", "Abmaj7", "Abmaj9", "Abmajor",
 //"Abminor", "Abm#7", "Abm7", "Abm7b5", "Abm6", "Abm9", "Abmaj9", "Abm11", "Abadd9", "Absus2", "Absus4", "Abdim", "Abdim7", "Abaug", "Abhalfdim",
 //A
-//"A/C#", "A/E", "A/G#", "A/G", "A/B", "Ab5", "A5", "A6", "A69", "A7", "A7b5", "A7b9", "A7#5", "A7#9", "A7sus4", "A9", "A9b5", "A9x5", "A9sus4", "Amaj7", "Amaj9", "Amajor",
+//"A/C#", "A/E", "A/G#", "A/G", "A/B", "Ab5", "A5", "A6", "A69", "A7", "A7b5", "A7b9", "A7#5", "A7#9", "A7sus4", "A9", "A9b5", "A9#5", "A9sus4", "Amaj7", "Amaj9", "Amajor",
 //"Aminor", "Am#7", "Am7", "Am7b5", "Am6", "Am9", "Amaj9", "Am11", "Aadd9", "Asus2", "Asus4", "Adim", "Adim7", "Aaug", "Ahalfdim",
 //A#
-//"A#/D", "A#/F", "A#/A", "A#/G#", "A#/C", "A#b5", "A#5", "A#6", "A#69", "A#7", "A#7b5", "A#7b9", "A#7#5", "A#7#9", "A#7sus4", "A#9", "A#9b5", "A#9x5", "A#9sus4", "A#maj7", "A#maj9", "A#major",
+//"A#/D", "A#/F", "A#/A", "A#/G#", "A#/C", "A#b5", "A#5", "A#6", "A#69", "A#7", "A#7b5", "A#7b9", "A#7#5", "A#7#9", "A#7sus4", "A#9", "A#9b5", "A#9#5", "A#9sus4", "A#maj7", "A#maj9", "A#major",
 //"A#minor", "A#m#7", "A#m7", "A#m7b5", "A#m6", "A#m9", "A#maj9", "A#m11", "A#add9", "A#sus2", "A#sus4", "A#dim", "A#dim7", "A#aug", "A#halfdim",
 //Bb
-//"Bb/D", "Bb/F", "Bb/A", "Bb/Ab", "Bb/C", "Bbb5", "Bb5", "Bb6", "Bb69", "Bb7", "Bb7b5", "Bb7b9", "Bb7#5", "Bb7#9", "Bb7sus4", "Bb9", "Bb9b5", "Bb9x5", "Bb9sus4", "Bbmaj7", "Bbmaj9", "Bbmajor",
+//"Bb/D", "Bb/F", "Bb/A", "Bb/Ab", "Bb/C", "Bbb5", "Bb5", "Bb6", "Bb69", "Bb7", "Bb7b5", "Bb7b9", "Bb7#5", "Bb7#9", "Bb7sus4", "Bb9", "Bb9b5", "Bb9#5", "Bb9sus4", "Bbmaj7", "Bbmaj9", "Bbmajor",
 //"Bbminor", "Bbm#7", "Bbm7", "Bbm7b5", "Bbm6", "Bbm9", "Bbmaj9", "Bbm11", "Bbadd9", "Bbsus2", "Bbsus4", "Bbdim", "Bbdim7", "Bbaug", "Bbhalfdim",
 //B
-//"B/D#", "B/F#", "B/A#", "B/A", "B/C#", "Bb5", "B5", "B6", "B69", "B7", "B7b5", "B7b9", "B7#5", "B7#9", "B7sus4", "B9", "B9b5", "B9x5", "B9sus4", "Bmaj7", "Bmaj9", "Bmajor",
+//"B/D#", "B/F#", "B/A#", "B/A", "B/C#", "Bb5", "B5", "B6", "B69", "B7", "B7b5", "B7b9", "B7#5", "B7#9", "B7sus4", "B9", "B9b5", "B9#5", "B9sus4", "Bmaj7", "Bmaj9", "Bmajor",
 //"Bminor", "Bm#7", "Bm7", "Bm7b5", "Bm6", "Bm9", "Bmaj9", "Bm11", "Badd9", "Bsus2", "Bsus4", "Bdim", "Bdim7", "Baug", "Bhalfdim"];
 var answeringtime = 8;
 var solutiontime = 5;
@@ -84,7 +84,7 @@ var chordsleft = 20;
 function display_tab(id) {
 	$('.panel').hide();
 	//If the tab required a visual keyboard (don't forget to clear it)
-	if ((id == "question") || (id == "visualizer")){
+	if ((id == "chords") || (id == "visualizer")){
 		if (lastChord.length > 0) 
 		{ 
 			clearKeyboard(lastChord);
@@ -294,11 +294,10 @@ function compute(chord) {
 			console.log(final_chord+"9b5");
 		} else if (chord.substr(1,1) == "#") {
 			//C9#5
-			//Même qu'au dessus avec une quinte+
-			//fondamentale, tierce, quinte+, septième-, neuvième
+			//Même qu'au dessus avec une quinte+ sans 7TH
+			//fondamentale, tierce, quinte+, neuvième
 			notes.push(4);//tierce
 			notes.push(8);//quinte+
-			notes.push(10);//septième-
 			notes.push(14);//neuvième
 			console.log(final_chord+"9#5");
 		} else {
@@ -606,7 +605,7 @@ function stopChordTest() {
 	}
 }
 
-//Propose a chord, launch a countdown and display the corrects involved keys 
+//Propose a chord, launch a countdown and display the corrects keys 
 function askChord() {
 	//random on chordlist length to pick a random chord to display
 	//console.log(availableChords[Math.floor((Math.random() * availableChords.length) + 1)]);
