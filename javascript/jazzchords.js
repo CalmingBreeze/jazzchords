@@ -96,7 +96,7 @@ function display_tab(id) {
 
 //Highlight a note in the svg keyboard
 function drawNote(id) {
-	console.log("Appel à drawNote avec l'id suivant : "+id);
+	//console.log("Appel à drawNote avec l'id suivant : "+id);
 	var key = document.getElementById("Key"+id);
 	key.style.fill = "#0000ff";
 }
