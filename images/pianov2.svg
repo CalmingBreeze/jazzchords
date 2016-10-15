@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg 
+	xmlns="http://www.w3.org/2000/svg"
+	id="pianoKeyboard"
+	width="165.6"
+	height="150"
+	version="1.1">
+	<defs>
+		<!-- Felt Red Line above the key-->
+		<line id="keyRedTopFeltLine" x1="0" y1="0" x2="165.6" y2="0" stroke-width="2" stroke="#CF0000"/>
+		
+		<!-- Keys templates -->
+		<!-- Full white key (C8) 1x -->
+		<rect id="C8_Key" width="23.6" height="150" fill="white" stroke="black" stroke-width=".5" rx="0" ry="0" />
+		<!-- Nearly full white key (A0) 1x -->
+		<polygon id="A0_Key" points="0,150 23,150 23,95 18,95 18,0 0,0" style="fill:none; stroke:black" stroke-width=".5" />
+		
+		<polygon id="C_key" points="0,150 23,150 23,96 15,96 15,0 0,0" style="fill:none; stroke:black" stroke-width=".5" />
+		<polygon id="D_key" points="0,150 23,150 23,96 18,96 18,0 5,0 5,96 0,96" style="fill:none; stroke:black" stroke-width=".5" />
+		<polygon id="E_key" points="0,150 23,150 23,0 8,0 8,96 0,96" style="fill:none; stroke:black" stroke-width=".5" />
+		<polygon id="F_key" points="0,150 23,150 23,96 13,96 13,0 0,0" style="fill:none; stroke:black" stroke-width=".5" />
+		<polygon id="G_key" points="0,150 23,150 23,96 16.5,96 16.5,0 3,0 3,96 0,96" style="fill:none; stroke:black" stroke-width=".5" />
+		<polygon id="A_key" points="0,150 23,150 23,96 20,96 20,0 6.5,0 6.5,96 0,96" style="fill:none; stroke:black" stroke-width=".5" />
+		<polygon id="B_key" points="0,150 23,150 23,0 10,0 10,96 0,96" style="fill:none; stroke:black" stroke-width=".5" />
+		
+		<!-- Black keys (C#,D#,F#,G#,A#) 5x -->
+		<rect id="FBT" width="11.5" height="95" fill="black" stroke="black" stroke-width=".5" rx="0" ry="0" />
+		
+		<g id="Octave">
+			<!-- C -->
+			<use xlink:href="#C_key" x="0" y="0" />
+			<!-- D -->
+			<use xlink:href="#D_key" x="23.65" y="0" />
+			<!-- E -->
+			<use xlink:href="#E_key" x="47.3" y="0" />
+			<!-- F -->
+			<use xlink:href="#F_key" x="70.95" y="0" />
+			<!-- G -->
+			<use xlink:href="#G_key" x="94.6" y="0" />
+			<!-- A -->
+			<use xlink:href="#A_key" x="118.25" y="0" />
+			<!-- B -->
+			<use xlink:href="#B_key" x="141.9" y="0" />
+			
+			<!-- C#/Db -->
+			<use xlink:href="#FBT" x="16" y="0" />
+			<!-- D#/Eb -->
+			<use xlink:href="#FBT" x="42.6" y="0" />
+			<!-- F#/Gb -->
+			<use xlink:href="#FBT" x="85" y="0" />
+			<!-- G#/Ab -->
+			<use xlink:href="#FBT" x="112.1" y="0" />
+			<!-- A#/Bb -->
+			<use xlink:href="#FBT" x="139.3" y="0" />
+			
+			<use xlink:href="#keyRedTopFeltLine" x="0" y="0" />
+		</g>
+	</defs>
+	
+	<use xlink:href="#Octave" x="0" y="0" />
+	<use xlink:href="#Octave" x="165.65" y="0" />
+</svg>

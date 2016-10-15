@@ -660,5 +660,12 @@ function askChord() {
 }
 
 $(document).ready(function() {
-	display_tab('question');
+	display_tab('chords');
+	test829 = new SVGKeyboard('test829');
+	
+	var hardCodedSvgKeyboard = document.querySelector('#keyboard.panel');
+	document.body.insertBefore(test829.init2(), hardCodedSvgKeyboard);
+	//console.log(hardCodedSvgKeyboard);
+	
+	//console.log(test829.init2());
 });
