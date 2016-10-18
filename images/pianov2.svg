@@ -10,11 +10,13 @@
 		<line id="keyRedTopFeltLine" x1="0" y1="0" x2="165.6" y2="0" stroke-width="2" stroke="#CF0000"/>
 		
 		<!-- Keys templates -->
-		<!-- Full white key (C8) 1x -->
-		<rect id="C8_Key" width="23.6" height="150" fill="white" stroke="black" stroke-width=".5" rx="0" ry="0" />
+		<!-- White key (C8) 1x -->
+		<rect id="C8_Key" width="23.6" height="150" fill="white" stroke="black" stroke-width=".5" />
+		<!-- Black keys (C#,D#,F#,G#,A#) 5x -->
+		<rect id="FBK" width="11.5" height="95" fill="black" stroke="black" stroke-width=".5" />
 		<!-- Nearly full white key (A0) 1x -->
 		<polygon id="A0_Key" points="0,150 23,150 23,95 18,95 18,0 0,0" style="fill:none; stroke:black" stroke-width=".5" />
-		
+		<!-- Usual key in chromatic order -->
 		<polygon id="C_key" points="0,150 23,150 23,96 15,96 15,0 0,0" style="fill:none; stroke:black" stroke-width=".5" />
 		<polygon id="D_key" points="0,150 23,150 23,96 18,96 18,0 5,0 5,96 0,96" style="fill:none; stroke:black" stroke-width=".5" />
 		<polygon id="E_key" points="0,150 23,150 23,0 8,0 8,96 0,96" style="fill:none; stroke:black" stroke-width=".5" />
@@ -23,8 +25,6 @@
 		<polygon id="A_key" points="0,150 23,150 23,96 20,96 20,0 6.5,0 6.5,96 0,96" style="fill:none; stroke:black" stroke-width=".5" />
 		<polygon id="B_key" points="0,150 23,150 23,0 10,0 10,96 0,96" style="fill:none; stroke:black" stroke-width=".5" />
 		
-		<!-- Black keys (C#,D#,F#,G#,A#) 5x -->
-		<rect id="FBT" width="11.5" height="95" fill="black" stroke="black" stroke-width=".5" rx="0" ry="0" />
 		
 		<g id="Octave">
 			<!-- C -->
@@ -43,15 +43,15 @@
 			<use xlink:href="#B_key" x="141.9" y="0" />
 			
 			<!-- C#/Db -->
-			<use xlink:href="#FBT" x="16" y="0" />
+			<use xlink:href="#FBK" x="16" y="0" />
 			<!-- D#/Eb -->
-			<use xlink:href="#FBT" x="42.6" y="0" />
+			<use xlink:href="#FBK" x="42.6" y="0" />
 			<!-- F#/Gb -->
-			<use xlink:href="#FBT" x="85" y="0" />
+			<use xlink:href="#FBK" x="85" y="0" />
 			<!-- G#/Ab -->
-			<use xlink:href="#FBT" x="112.1" y="0" />
+			<use xlink:href="#FBK" x="112.1" y="0" />
 			<!-- A#/Bb -->
-			<use xlink:href="#FBT" x="139.3" y="0" />
+			<use xlink:href="#FBK" x="139.3" y="0" />
 			
 			<use xlink:href="#keyRedTopFeltLine" x="0" y="0" />
 		</g>

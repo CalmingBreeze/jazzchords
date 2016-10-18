@@ -661,11 +661,12 @@ function askChord() {
 
 $(document).ready(function() {
 	display_tab('chords');
+	
+	//find where to add the keyboard
+	var hardCodedSvgKeyboard = document.querySelector('#keyboard.panel');
 	test829 = new SVGKeyboard('test829');
 	
-	var hardCodedSvgKeyboard = document.querySelector('#keyboard.panel');
-	document.body.insertBefore(test829.init2(), hardCodedSvgKeyboard);
-	//console.log(hardCodedSvgKeyboard);
-	
-	//console.log(test829.init2());
+	//Create and insert it
+	var n = document.importNode(test829.init2(),true);
+    document.body.insertBefore(n, hardCodedSvgKeyboard);
 });
