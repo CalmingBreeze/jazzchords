@@ -667,6 +667,6 @@ $(document).ready(function() {
 	test829 = new SVGKeyboard('test829');
 	
 	//Create and insert it
-	var n = document.importNode(test829.init2(),true);
+	var n = document.importNode(test829.init(3),true);
     document.body.insertBefore(n, hardCodedSvgKeyboard);
 });

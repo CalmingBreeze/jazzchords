@@ -6,7 +6,8 @@
 //@name : name of the chord
 class Chord {
 	
-	constructor(name,inversion) {
+	constructor(keyboardId,name,inversion) {
+		this.keyboardId = keyboardId;
 		this.name = name;
 		this.inversion = inversion;
 		this.notes = [];
@@ -24,6 +25,12 @@ class Chord {
 		this.notes.push(note)
 	};
 	
+	//Call highlight on each of the key of the chord
+	highlight() {
+		for (var i = 0; i < notes.length; i++) {
+			notes[i].highlight();
+		}		
+	}
 };
 
 

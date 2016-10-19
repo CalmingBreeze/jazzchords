@@ -1,11 +1,24 @@
 // define the SVGkeyboard class
 //
 // a class used to display the stricken keys
+
+//Unfortunatly, const cannot be part of the class at the moment.
+//Define key dimensions (in mm)
+const WHITE_KEY_HEIGHT = 150;
+const WHITE_KEY_WIDTH = 23.6;
+
+const BLACK_KEY_HEIGHT = 95;
+const BLACK_KEY_WIDTH = 11.5;
+
+const OCTAVE_HEIGHT = WHITE_KEY_HEIGHT;
+const OCTAVE_WIDTH = 7*WHITE_KEY_WIDTH;
+
 class SVGKeyboard {
 	//create a new keyboard with a specific id, and various octaves
-	constructor(id, octaveNumber = 1) {
+	constructor(id, octaveNumber = 1, startingOctave = 4) {
 		this.id = id;
 		this.octaveNumber = octaveNumber;
+		
 	}
 	
 	get id() {
@@ -16,27 +29,29 @@ class SVGKeyboard {
 		this._id = myid;
 	};
 	
-	//return the correct DOM element to append at the pageX
+	// init
+	// @params octaveNumber = Number of wanted octaves
+	// @params magnify = Zoom factor
+	// @return the correct SVG DOM element to append at the page
+	
 	//First build the defs then use 'em
 	//the prompted result can be found at ../images/
-	init2() {
-		//Structure
-		// svg
-		//  |-> g
-		//      |-> rect (border)
-		//      |-> lines (between keys)
-		//      |-> 
+	init(octaveNumber = 1, startingOctave = 4, magnify = 2) {
 
+		var magnify = magnify;
+	
 		var SVG_NS = 'http://www.w3.org/2000/svg';
 		var XLink_NS = 'http://www.w3.org/1999/xlink';
 		
 		var svg = document.createElementNS(SVG_NS, "svg");
 		svg.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:xlink", "http://www.w3.org/1999/xlink");
-		svg.setAttributeNS(null,'id', 'keyboard2');
+		svg.setAttributeNS(null,'id', this.id);
 		svg.setAttributeNS(null,'class', 'panel');
-		svg.setAttributeNS(null,'width', '165.6');
-		svg.setAttributeNS(null,'height', '150');
+		//Here handle the wiewport and size of the top container
+		svg.setAttributeNS(null,'width', magnify*(octaveNumber*OCTAVE_WIDTH));
+		svg.setAttributeNS(null,'height', magnify*OCTAVE_HEIGHT);
 		svg.setAttributeNS(null,'style', 'border: 1px solid black');
+		svg.setAttributeNS(null,'transform',"scale("+magnify+")");
 		
 		//define the definitions of the svg and the patterns like an octave
 		var defs = document.createElementNS(SVG_NS, "defs");
@@ -44,30 +59,30 @@ class SVGKeyboard {
 		//define the red felt line
 		var line = document.createElementNS(SVG_NS, 'line');
 		line.id ="keyRedTopFeltLine";
-		line.setAttributeNS(null,'x1',"0");
-		line.setAttributeNS(null,'y1',"0");
-		line.setAttributeNS(null,'x2',"165.6");
-		line.setAttributeNS(null,'y2',"0");
-		line.setAttributeNS(null,'stroke-width',"2");
+		line.setAttributeNS(null,'x1',0);
+		line.setAttributeNS(null,'y1',0);
+		line.setAttributeNS(null,'x2',OCTAVE_WIDTH);
+		line.setAttributeNS(null,'y2',0);
+		line.setAttributeNS(null,'stroke-width',2);
 		line.setAttributeNS(null,'stroke',"#CF0000");
 		
 		// White key (C8)
 		var C8Key = document.createElementNS(SVG_NS, 'rect');
 		C8Key.id = "C8_Key";
-		C8Key.setAttributeNS(null,'width',"23.6");
-		C8Key.setAttributeNS(null,'height',"150");
+		C8Key.setAttributeNS(null,'width',WHITE_KEY_WIDTH);
+		C8Key.setAttributeNS(null,'height',OCTAVE_HEIGHT);
 		C8Key.setAttributeNS(null,'fill',"white");
 		C8Key.setAttributeNS(null,'stroke',"black");
-		C8Key.setAttributeNS(null,'stroke-width',".5");
+		C8Key.setAttributeNS(null,'stroke-width',.5);
 		
 		// Black keys (C#,D#,F#,G#,A#)
 		var blackKey = document.createElementNS(SVG_NS, 'rect');
 		blackKey.id = "FBK";
-		blackKey.setAttributeNS(null,'width',"11.5");
-		blackKey.setAttributeNS(null,'height',"95");
+		blackKey.setAttributeNS(null,'width',BLACK_KEY_WIDTH);
+		blackKey.setAttributeNS(null,'height',BLACK_KEY_HEIGHT);
 		blackKey.setAttributeNS(null,'fill',"black");
 		blackKey.setAttributeNS(null,'stroke',"black");
-		blackKey.setAttributeNS(null,'stroke-width',".5");
+		blackKey.setAttributeNS(null,'stroke-width',.5);
 		
 		//iterates to define normal keys
 		var defaultsKeyData = { A0_Key:"0,150 23,150 23,95 18,95 18,0 0,0", 
@@ -83,7 +98,7 @@ class SVGKeyboard {
 			whiteKey.id = key;
 			whiteKey.setAttributeNS(null,'points',defaultsKeyData[key]);
 			whiteKey.setAttributeNS(null,'style',"fill:none; stroke:black");
-			whiteKey.setAttributeNS(null,'stroke-width',".5");
+			whiteKey.setAttributeNS(null,'stroke-width',.5);
 			defs.appendChild(whiteKey);
 		}
 		
@@ -98,28 +113,42 @@ class SVGKeyboard {
 			var use = document.createElementNS(SVG_NS, 'use');
 			use.setAttributeNS(XLink_NS,'xlink:href',"#"+entry[0]);
 			use.setAttributeNS(null,'x',entry[1]);
-			use.setAttributeNS(null,'y',"0");
+			use.setAttributeNS(null,'y',0);
 			octave.appendChild(use);
 		});
 		
-		
-		//TO DO Check if the order is correct (all the def before invoke)
+		//Includes defs in our SVG
 		defs.appendChild(line);
 		defs.appendChild(C8Key);
 		defs.appendChild(blackKey);
 		defs.appendChild(octave);
 		svg.appendChild(defs);
 		
-		//invoke 1 octaves
-		var invoke = document.createElementNS(SVG_NS, 'use');
-		invoke.setAttributeNS(XLink_NS,'xlink:href',"#Octave");
-		invoke.setAttributeNS(null,'x',"0");
-		invoke.setAttributeNS(null,'y',"0");
-		svg.appendChild(invoke);
-		//invoke.setAttributeNS(null,'x',"165.65");
-		//svg.appendChild(invoke);
-		//invoke.setAttributeNS(null,'x',"311.30");
-		//svg.appendChild(invoke);
+		//Add any defined number of octaves
+		for (var i = 0; i < octaveNumber; i++) {
+			//invoke 1 octaves
+			var invoke = document.createElementNS(SVG_NS, 'use');
+			invoke.setAttributeNS(null,'id',"Octave"+(startingOctave+i));
+			invoke.setAttributeNS(XLink_NS,'xlink:href',"#Octave");
+			invoke.setAttributeNS(null,'x',i*OCTAVE_WIDTH);
+			invoke.setAttributeNS(null,'y',0);
+			svg.appendChild(invoke);
+		}		
 		return svg;
 	};
-}
+	
+	//take a chord or a note and display it
+	highlight(notes) {
+		
+		//we need to check if the display keyboard is enough to display all the keyboard.
+		//Chord and notes implement the method
+		notes.highlight();
+	}
+	
+	// MVC ?
+	zoom(percent) {
+		
+	};
+};
+
+
