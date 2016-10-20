@@ -19,7 +19,8 @@ class SVGKeyboard {
 	//create a new keyboard with a specific id, and various octaves
 	constructor(id, octaveNumber = 1, startingOctave = 4) {
 		this.id = id;
-		this.octaveNumber = octaveNumber;		
+		this.octaveNumber = octaveNumber;
+		this.keys = [];
 	}
 	
 	get id() {
@@ -28,6 +29,14 @@ class SVGKeyboard {
 
 	set id(myid) {
 		this._id = myid;
+	};
+	
+	get keys() {
+		return this._keys;
+	};
+
+	set keys(keysArray) {
+		this._keys = keysArray;
 	};
 	
 	// init
@@ -141,6 +150,9 @@ class SVGKeyboard {
 				use.setAttributeNS(null,'x',xCoord.toFixed(2));
 				use.setAttributeNS(null,'y',0);
 				
+				//store KeyId 
+				use.setAttribute('noteId',entry[2]+(currentOctave*12));
+				
 				octave.appendChild(use);
 			}
 			
@@ -157,43 +169,25 @@ class SVGKeyboard {
 		return svg;
 	};
 	
+	//TO DO => Chain into constructor
 	// Bind event to produce sound when the key is stricken
 	bindSoundEvents(){
-		var event = new Event('highlight');
-		var event2 = new Event('clear');
-		var event3 = new Event('stricken');
-		var event4 = new Event('released');
+		//var event = new Event('highlight');
+		//var event2 = new Event('clear');
+		//var event3 = new Event('stricken');
+		//var event4 = new Event('released');
 		
-		var keys = document.querySelectorAll('svg#'+this.id+' use.pianoKey');
+		//var C4 = new Key(48);
+		//var C5 = new Key(49);
+		//C4.bindSoundEvents();
+		//C5.bindSoundEvents();
 		
-		for (var i = 0; i < keys.length; i++) {
-			
-			var currentKey = keys[i];
-			
-			keys[i].addEventListener("mousedown", function() { this.dispatchEvent(event3); }, false );
-			
-			//Add event release
-			keys[i].addEventListener('released', function () {
-				console.log(this);
-				this.classList.remove("stricken");
-				//console.log('Releasing :'+this.id);
-			}, false);
-			
-			//Add event stricken
-			keys[i].addEventListener('stricken', function (e) {
-				//TO FIX => ERROR WHEN TRAVELLING BETWEEN 2 ELEMENT WITH THIS
-				
-				//e.target.classList.add("stricken");
-				this.classList.add("stricken");
-				//console.log('Striking :'+e.target.id);
-				//console.log('Playing :'+e.target.id);
-				var keySound = new Audio('../audio/'+this.id+".mp3");
-				//keySound.onended = function () { console.log('sound ended'); this.dispatchEvent(event4); };
-				keySound.addEventListener("ended", function(e) { console.log('sound ended :'+currentKey.id); currentKey.dispatchEvent(event4); }, false);
-				keySound.play();
-				
-			}, false);
-			
+		//get all keys
+		var keysToAdd = document.querySelectorAll('svg#'+this.id+' use.pianoKey');
+		
+		for (var i = 0; i < keysToAdd.length; i++) {
+			//Add new Key
+			this._keys.push(new Key(keysToAdd[i].attributes.noteId.value));
 		}
 
 	}
