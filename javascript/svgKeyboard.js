@@ -6,6 +6,8 @@
 //Define key dimensions (in mm)
 const WHITE_KEY_HEIGHT = 150;
 const WHITE_KEY_WIDTH = 23.6;
+const WHITE_KEY_SPACEMENT = 0.05;
+const WHITE_KEY_AND_SPACEMENT = 23.65;
 
 const BLACK_KEY_HEIGHT = 95;
 const BLACK_KEY_WIDTH = 11.5;
@@ -17,8 +19,7 @@ class SVGKeyboard {
 	//create a new keyboard with a specific id, and various octaves
 	constructor(id, octaveNumber = 1, startingOctave = 4) {
 		this.id = id;
-		this.octaveNumber = octaveNumber;
-		
+		this.octaveNumber = octaveNumber;		
 	}
 	
 	get id() {
@@ -36,7 +37,7 @@ class SVGKeyboard {
 	
 	//First build the defs then use 'em
 	//the prompted result can be found at ../images/
-	init(octaveNumber = 1, startingOctave = 4, magnify = 2) {
+	init(octaveNumber = 1, startingOctave = 2, magnify = 2) {
 
 		var magnify = magnify;
 	
@@ -96,46 +97,106 @@ class SVGKeyboard {
 		for (var key in defaultsKeyData) {
 			var whiteKey = document.createElementNS(SVG_NS, 'polygon');
 			whiteKey.id = key;
+			whiteKey.setAttributeNS(null,'width',WHITE_KEY_WIDTH);
 			whiteKey.setAttributeNS(null,'points',defaultsKeyData[key]);
-			whiteKey.setAttributeNS(null,'style',"fill:none; stroke:black");
+			//whiteKey.setAttributeNS(null,'style',"fill:none; stroke:black");
 			whiteKey.setAttributeNS(null,'stroke-width',.5);
 			defs.appendChild(whiteKey);
 		}
-		
-		//define octave
-		var octave = document.createElementNS(SVG_NS, 'g');
-		octave.id = "Octave";
-
-		//iterates to use prior defined graphics
-		var useDefsData = [ ["C_key",0], ["D_key",23.65], ["E_key",47.3], ["F_key",70.95], ["G_key",94.6], ["A_key",118.25], ["B_key",141.9],
-							["FBK",16], ["FBK",42.6], ["FBK",85], ["FBK",112.1], ["FBK",139.3], ["keyRedTopFeltLine",0]]
-		useDefsData.forEach(function(entry) {
-			var use = document.createElementNS(SVG_NS, 'use');
-			use.setAttributeNS(XLink_NS,'xlink:href',"#"+entry[0]);
-			use.setAttributeNS(null,'x',entry[1]);
-			use.setAttributeNS(null,'y',0);
-			octave.appendChild(use);
-		});
 		
 		//Includes defs in our SVG
 		defs.appendChild(line);
 		defs.appendChild(C8Key);
 		defs.appendChild(blackKey);
-		defs.appendChild(octave);
 		svg.appendChild(defs);
+		
+		//iterates to use prior defined graphics
+		var useDefsData = [ ["C_key","C",0,0], 
+							["D_key","D",2,WHITE_KEY_AND_SPACEMENT], 
+							["E_key","E",4,2*WHITE_KEY_AND_SPACEMENT], 
+							["F_key","F",5,3*WHITE_KEY_AND_SPACEMENT], 
+							["G_key","G",7,4*WHITE_KEY_AND_SPACEMENT], 
+							["A_key","A",9,5*WHITE_KEY_AND_SPACEMENT], 
+							["B_key","B",11,6*WHITE_KEY_AND_SPACEMENT],
+							["FBK","C#",1,16.1], ["FBK","D#",3,42.65], ["FBK","F#",6,85], ["FBK","G#",8,112.15], ["FBK","A#",10,139.3] ]
 		
 		//Add any defined number of octaves
 		for (var i = 0; i < octaveNumber; i++) {
-			//invoke 1 octaves
-			var invoke = document.createElementNS(SVG_NS, 'use');
-			invoke.setAttributeNS(null,'id',"Octave"+(startingOctave+i));
-			invoke.setAttributeNS(XLink_NS,'xlink:href',"#Octave");
-			invoke.setAttributeNS(null,'x',i*OCTAVE_WIDTH);
-			invoke.setAttributeNS(null,'y',0);
-			svg.appendChild(invoke);
+			
+			//define octave
+			var octave = document.createElementNS(SVG_NS, 'g');
+			var currentOctave = (startingOctave+i);
+			octave.id = "Octave"+currentOctave;
+
+			for (var j = 0; j < useDefsData.length; j++) {
+				var entry = useDefsData[j];
+				var use = document.createElementNS(SVG_NS, 'use');
+				var xCoord = (i*OCTAVE_WIDTH)+entry[3];
+				
+				use.id = "key"+(entry[2]+(currentOctave*12));
+				use.setAttributeNS(null,'class',"pianoKey");
+				use.setAttributeNS(null,'fill',"white");
+				use.setAttributeNS(null,'stroke',"black");
+				use.setAttributeNS(XLink_NS,'xlink:href',"#"+entry[0]);
+				use.setAttributeNS(null,'x',xCoord.toFixed(2));
+				use.setAttributeNS(null,'y',0);
+				
+				octave.appendChild(use);
+			}
+			
+			//add the top redline
+			var feltLine = document.createElementNS(SVG_NS, 'use');
+			feltLine.setAttributeNS(XLink_NS,'xlink:href',"#keyRedTopFeltLine");
+			feltLine.setAttributeNS(null,'x',(i*OCTAVE_WIDTH));
+			feltLine.setAttributeNS(null,'y',0);
+			
+			octave.appendChild(feltLine);
+			svg.appendChild(octave);
+		
 		}		
 		return svg;
 	};
+	
+	// Bind event to produce sound when the key is stricken
+	bindSoundEvents(){
+		var event = new Event('highlight');
+		var event2 = new Event('clear');
+		var event3 = new Event('stricken');
+		var event4 = new Event('released');
+		
+		var keys = document.querySelectorAll('svg#'+this.id+' use.pianoKey');
+		
+		for (var i = 0; i < keys.length; i++) {
+			
+			var currentKey = keys[i];
+			
+			keys[i].addEventListener("mousedown", function() { this.dispatchEvent(event3); }, false );
+			
+			//Add event release
+			keys[i].addEventListener('released', function () {
+				console.log(this);
+				this.classList.remove("stricken");
+				//console.log('Releasing :'+this.id);
+			}, false);
+			
+			//Add event stricken
+			keys[i].addEventListener('stricken', function (e) {
+				//TO FIX => ERROR WHEN TRAVELLING BETWEEN 2 ELEMENT WITH THIS
+				
+				//e.target.classList.add("stricken");
+				this.classList.add("stricken");
+				//console.log('Striking :'+e.target.id);
+				//console.log('Playing :'+e.target.id);
+				var keySound = new Audio('../audio/'+this.id+".mp3");
+				//keySound.onended = function () { console.log('sound ended'); this.dispatchEvent(event4); };
+				keySound.addEventListener("ended", function(e) { console.log('sound ended :'+currentKey.id); currentKey.dispatchEvent(event4); }, false);
+				keySound.play();
+				
+			}, false);
+			
+		}
+
+	}
 	
 	//take a chord or a note and display it
 	highlight(notes) {

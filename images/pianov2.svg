@@ -37,32 +37,32 @@
 <!-- V2 Reduce abstraction level to reserve an id for each key -->
 <svg id="test829" class="panel" xmlns:xlink="http://www.w3.org/1999/xlink" width="991.2" height="300" style="border: 1px solid black" transform="scale(2)">
 	<defs>
-		<polygon id="A0_Key" points="0,150 23,150 23,95 18,95 18,0 0,0" style="fill:none; stroke:black" stroke-width="0.5"/>
-		<polygon id="C_key" points="0,150 23,150 23,96 15,96 15,0 0,0" style="fill:none; stroke:black" stroke-width="0.5"/>
-		<polygon id="D_key" points="0,150 23,150 23,96 18,96 18,0 5,0 5,96 0,96" style="fill:none; stroke:black" stroke-width="0.5"/>
-		<polygon id="E_key" points="0,150 23,150 23,0 8,0 8,96 0,96" style="fill:none; stroke:black" stroke-width="0.5"/>
-		<polygon id="F_key" points="0,150 23,150 23,96 13,96 13,0 0,0" style="fill:none; stroke:black" stroke-width="0.5"/>
-		<polygon id="G_key" points="0,150 23,150 23,96 16.5,96 16.5,0 3,0 3,96 0,96" style="fill:none; stroke:black" stroke-width="0.5"/>
-		<polygon id="A_key" points="0,150 23,150 23,96 20,96 20,0 6.5,0 6.5,96 0,96" style="fill:none; stroke:black" stroke-width="0.5"/>
-		<polygon id="B_key" points="0,150 23,150 23,0 10,0 10,96 0,96" style="fill:none; stroke:black" stroke-width="0.5"/>
+		<polygon id="A0_Key" points="0,150 23,150 23,95 18,95 18,0 0,0" stroke-width="0.5"/>
+		<polygon id="C_key" points="0,150 23,150 23,96 15,96 15,0 0,0"  stroke-width="0.5"/>
+		<polygon id="D_key" points="0,150 23,150 23,96 18,96 18,0 5,0 5,96 0,96"  stroke-width="0.5"/>
+		<polygon id="E_key" points="0,150 23,150 23,0 8,0 8,96 0,96" stroke-width="0.5"/>
+		<polygon id="F_key" points="0,150 23,150 23,96 13,96 13,0 0,0"  stroke-width="0.5"/>
+		<polygon id="G_key" points="0,150 23,150 23,96 16.5,96 16.5,0 3,0 3,96 0,96" stroke-width="0.5"/>
+		<polygon id="A_key" points="0,150 23,150 23,96 20,96 20,0 6.5,0 6.5,96 0,96"  stroke-width="0.5"/>
+		<polygon id="B_key" points="0,150 23,150 23,0 10,0 10,96 0,96" stroke-width="0.5"/>
 		<line id="keyRedTopFeltLine" x1="0" y1="0" x2="165.20000000000002" y2="0" stroke-width="2" stroke="#CF0000"/>
 		<rect id="C8_Key" width="23.6" height="150" fill="white" stroke="black" stroke-width="0.5"/>
 		<rect id="FBK" width="11.5" height="95" fill="black" stroke="black" stroke-width="0.5"/>
 	</defs>
 	
 	<g id="Octave0">
-		<use id="C0" xlink:href="#C_key" x="0" y="0"/>
-		<use id="D0" xlink:href="#D_key" x="23.65" y="0"/>
-		<use id="E0" xlink:href="#E_key" x="47.3" y="0"/>
-		<use id="F0" xlink:href="#F_key" x="70.95" y="0"/>
-		<use id="G0" xlink:href="#G_key" x="94.6" y="0"/>
-		<use id="A0" xlink:href="#A_key" x="118.25" y="0"/>
-		<use id="B0" xlink:href="#B_key" x="141.9" y="0"/>
-		<use id="C0#" xlink:href="#FBK" x="16" y="0"/>
-		<use id="D0#" xlink:href="#FBK" x="42.6" y="0"/>
-		<use id="F0#" xlink:href="#FBK" x="85" y="0"/>
-		<use id="G0#" xlink:href="#FBK" x="112.1" y="0"/>
-		<use id="a0#" xlink:href="#FBK" x="139.3" y="0"/>
+		<use id="key48" class="pianoKey" fill="white" stroke="black" xlink:href="#C_key" x="0" y="0"/>
+		<use id="key50" class="pianoKey" fill="white" stroke="black" xlink:href="#D_key" x="23.65" y="0"/>
+		<use id="key52" class="pianoKey" fill="white" stroke="black" xlink:href="#E_key" x="47.3" y="0"/>
+		<use id="key53" class="pianoKey" fill="white" stroke="black" xlink:href="#F_key" x="70.95" y="0"/>
+		<use id="key55" class="pianoKey" fill="white" stroke="black" xlink:href="#G_key" x="94.6" y="0"/>
+		<use id="key57" class="pianoKey" fill="white" stroke="black" xlink:href="#A_key" x="118.25" y="0"/>
+		<use id="key59" class="pianoKey" fill="white" stroke="black" xlink:href="#B_key" x="141.9" y="0"/>
+		<use id="key49" class="pianoKey" fill="white" stroke="black" xlink:href="#FBK" x="16" y="0"/>
+		<use id="key51" class="pianoKey" fill="white" stroke="black" xlink:href="#FBK" x="42.6" y="0"/>
+		<use id="key54" class="pianoKey" fill="white" stroke="black" xlink:href="#FBK" x="85" y="0"/>
+		<use id="key56" class="pianoKey" fill="white" stroke="black" xlink:href="#FBK" x="112.1" y="0"/>
+		<use id="key59" class="pianoKey" fill="white" stroke="black" xlink:href="#FBK" x="139.3" y="0"/>
 		<use xlink:href="#keyRedTopFeltLine" x="0" y="0"/>
 	</g>
 </svg>

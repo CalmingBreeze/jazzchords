@@ -658,15 +658,3 @@ function askChord() {
 	//decrease remaining questions
 	chordsleft -= 1;
 }
-
-$(document).ready(function() {
-	display_tab('chords');
-	
-	//find where to add the keyboard
-	var hardCodedSvgKeyboard = document.querySelector('#keyboard.panel');
-	test829 = new SVGKeyboard('test829');
-	
-	//Create and insert it
-	var n = document.importNode(test829.init(3),true);
-    document.body.insertBefore(n, hardCodedSvgKeyboard);
-});
