@@ -2,54 +2,45 @@ $(document).ready(function() {
 	display_tab('chords');
 
 	//find where to add the keyboard
-	var hardCodedSvgKeyboard = document.querySelector('#keyboard.panel');
+	//var hardCodedSvgKeyboard = document.querySelector('#keyboard.panel');
 	test829 = new SVGKeyboard('test829');
 	
 	//Create and insert it
-	var n = document.importNode(test829.init(3),true);
-    document.body.insertBefore(n, hardCodedSvgKeyboard);
-	test829.bindSoundEvents();
+	//var n = document.importNode(test829.init(3),true);
+    //document.body.insertBefore(n, hardCodedSvgKeyboard);
+	//document.body.appendChild(n);
+	//test829.bindSoundEvents();
+	
+	var C4_note = new Note(48); //C4
+	var F4sharp_note = new Note(54); //F4#
+	var F5sharp_note = new Note(66); //F5#
 	
 	/*
-	var event = new Event('highlight');
-	var event2 = new Event('clear');
-	var event3 = new Event('strike');
-	var event4 = new Event('release');
-	
-	var target = document.querySelector('#key55');
-	target.addEventListener("mousedown", function() { target.dispatchEvent(event3); }, false );
-	target.addEventListener("mouseup", function() { target.dispatchEvent(event4); }, false );
-	
-	// Listen for the event.
-	target.addEventListener('highlight', function (e) {
-		//console.log(e.target.id);
-		document.querySelector("#"+e.target.id).classList.add("highlighted");
-		//console.log('Highlighting :'+e.target.id);
-	}, false);
-	//target.dispatchEvent(event);
-	
-	target.addEventListener('clear', function (e) {
-		//console.log(e.target.id);
-		document.querySelector("#"+e.target.id).classList.remove("highlighted");
-		//console.log('Clearing :'+e.target.id);
-	}, false);
-	//target.dispatchEvent(event2);
-	
-	target.addEventListener('strike', function (e) {
-		//console.log(e.target.id);
-		document.querySelector("#"+e.target.id).classList.add("stricken");
-		//console.log('Striking :'+e.target.id);
-		//console.log('Playing :'+e.target.id);
-		var keySound = new Audio('../audio/'+e.target.id+".mp3");
-		keySound.play();
-	}, false);
-	//target.dispatchEvent(event3);
-	
-	target.addEventListener('release', function (e) {
-		//console.log(e.target.id);
-		document.querySelector("#"+e.target.id).classList.remove("stricken");
-		//console.log('Releasing :'+e.target.id);
-	}, false);
-	//target.dispatchEvent(event4);
+	var test4 = new Chord('Cm7', 0);
+	console.log(test);
+	test4.addNote("C");
+	test4.addNote("Eb");
+	test4.addNote("G");
+	test4.addNote("Bb");
+	console.log(test4);
 	*/
+	
+	/*
+	//CMaj7
+	test829.keys[12].strike();
+	test829.keys[16].strike();
+	test829.keys[19].strike();
+	test829.keys[23].strike();
+	*/
+	
+	
+	//play C7 in Oct4
+	test829.playNote(C4_note);
+	test829.playNote(C4_note.third());
+	test829.playNote(C4_note.fifth());
+	test829.playNote(C4_note.seventh());
+	
+	
+	//play C7 in Oct4
+	//test829.playChord("C7");
 });

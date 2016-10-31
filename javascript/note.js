@@ -3,15 +3,14 @@
 // a note is the most basic component of the score (96 on 8 octaves)
 
 
-//var keys = {C:0, D:2, E:4, F:5, G:7, A:9, B:11};
 const KEYS_SHARPS = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 const KEYS_FLATS = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"];
 const UNALTERED_KEYS_INDEXES = [0, 2, 4, 5, 7, 9, 11];
 
-//Constructor
-//@pitch : name of the note
+
 class Note {
-	//
+	//Constructor
+	//@pitch : name of the note
 	constructor(keyNumber, alteration = 0) {
 		this._keyNumber = keyNumber;
 		this.octave = Math.floor(keyNumber/12);
@@ -108,20 +107,4 @@ class Note {
 		}
 		return new Note(this.keyNumber+gap,this.alteration);
 	}
-	
-	highlight() {
-		
-	}
 };
-
-
-var test = new Note(48); //C4
-var test2 = new Note(54); //F4#
-var test3 = new Note(66); //F5#
-console.log(test);
-console.log(test2);
-console.log(test3);
-console.log(test.name);
-console.log(test2.name);
-console.log(test3.name);
-

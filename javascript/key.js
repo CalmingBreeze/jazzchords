@@ -1,8 +1,8 @@
 //Define the Key class which bind sound and event to the SVG keyboards
 class Key {
 	constructor(keyNumber) {
-		console.log(keyNumber);
 		this._keyNumber = keyNumber;
+		this._DOMKeyObject = document.querySelector('use#key'+this._keyNumber+'.pianoKey');
 		this.bindSoundEvents();
 	}
 	
@@ -42,5 +42,11 @@ class Key {
 			keySound.play();
 			
 		}, false);
+	}
+	
+	//fireEvent
+	strike() {
+		//document.querySelector('use#key31.pianoKey').dispatchEvent(new Event('stricken'));
+		this._DOMKeyObject.dispatchEvent(new Event('stricken'));
 	}
 };

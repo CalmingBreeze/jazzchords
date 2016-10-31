@@ -6,10 +6,11 @@
 //@name : name of the chord
 class Chord {
 	
-	constructor(keyboardId,name,inversion) {
+	constructor(keyboardId,name,inversion, baseOctave = 4) {
 		this.keyboardId = keyboardId;
 		this.name = name;
 		this.inversion = inversion;
+		this.baseOctave = baseOctave;
 		this.notes = [];
 	};
 	
@@ -32,12 +33,3 @@ class Chord {
 		}		
 	}
 };
-
-
-//var test = new Chord('Cm7',0);
-//console.log(test);
-//test.addNote("C");
-//test.addNote("Eb");
-//test.addNote("G");
-//test.addNote("Bb");
-//console.log(test);

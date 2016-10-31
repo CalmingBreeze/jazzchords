@@ -16,11 +16,40 @@ const OCTAVE_HEIGHT = WHITE_KEY_HEIGHT;
 const OCTAVE_WIDTH = 7*WHITE_KEY_WIDTH;
 
 class SVGKeyboard {
-	//create a new keyboard with a specific id, and various octaves
-	constructor(id, octaveNumber = 1, startingOctave = 4) {
+
+	/**
+	  * Instanciate a new SVGKeyboard with a specific id and defined number of Octaves starting from a specified octave
+	  * @constructor
+	  * @param {Number} id - The id of the generated keyboard in the DOM
+	  * @param {Number} octaveNumber - The desired number of octave of the keyboard
+	  * @param {Number} startingOctave - The octave from start the generation (in most case we want C2->C5
+	  */
+	constructor(id, octaveNumber = 3, startingOctave = 2) {
 		this.id = id;
 		this.octaveNumber = octaveNumber;
-		this.keys = [];
+		this.keys = []; //always legnth of 96 to handle 8 octaves. Key object when it's on the range of the keyboard
+		
+		//Create the keyboard with default parameters 3 octaves from C2
+		var myKeyboard = document.importNode(this.generateKeyboard(),true);
+		
+		//Add it to the DOM then bind events
+		document.body.appendChild(myKeyboard);
+		//SVGElement is now existing in the DOM
+
+		//TO IMPROVE : find a better way to handle represented keys without having to 
+		//fill the array with null value to have correct indexes
+		for (var i = 0; i < 96; i++) {
+			this._keys.push(null);
+		}
+		
+		//find where to insert keys
+		//Now link key-attribute to the generated keys
+		var keysToAdd = document.querySelectorAll('svg#'+this.id+' use.pianoKey');
+		for (var i = 0; i < keysToAdd.length; i++) {
+			//Add new Key
+			this._keys[(startingOctave*12)+i] = new Key(keysToAdd[i].attributes.noteId.value);
+		}
+		
 	}
 	
 	get id() {
@@ -39,29 +68,14 @@ class SVGKeyboard {
 		this._keys = keysArray;
 	};
 	
-	// init
-	// @params octaveNumber = Number of wanted octaves
-	// @params magnify = Zoom factor
-	// @return the correct SVG DOM element to append at the page
-	
-	//First build the defs then use 'em
-	//the prompted result can be found at ../images/
-	init(octaveNumber = 1, startingOctave = 2, magnify = 2) {
-
-		var magnify = magnify;
-	
+	/**
+	  * Build the SVG structure of the keyboard SVG-definitions (ex:(white and black keys, octave, redline))
+	  * @param {svgDOMElement} svg - A basic SVG DOM ELEMENT with the usual properties defined
+	  * @return {svgDOMElement} Add to the param a full pianokeyboard related pattern definition
+	  */
+	buildSVGDefs(svg) {
 		var SVG_NS = 'http://www.w3.org/2000/svg';
 		var XLink_NS = 'http://www.w3.org/1999/xlink';
-		
-		var svg = document.createElementNS(SVG_NS, "svg");
-		svg.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:xlink", "http://www.w3.org/1999/xlink");
-		svg.setAttributeNS(null,'id', this.id);
-		svg.setAttributeNS(null,'class', 'panel');
-		//Here handle the wiewport and size of the top container
-		svg.setAttributeNS(null,'width', magnify*(octaveNumber*OCTAVE_WIDTH));
-		svg.setAttributeNS(null,'height', magnify*OCTAVE_HEIGHT);
-		svg.setAttributeNS(null,'style', 'border: 1px solid black');
-		svg.setAttributeNS(null,'transform',"scale("+magnify+")");
 		
 		//define the definitions of the svg and the patterns like an octave
 		var defs = document.createElementNS(SVG_NS, "defs");
@@ -117,16 +131,29 @@ class SVGKeyboard {
 		defs.appendChild(C8Key);
 		defs.appendChild(blackKey);
 		svg.appendChild(defs);
+							
+		return svg;
+	}
+
+	/**
+	  * Add Octave to the svg using previous defined structures via buildSVGDefs
+	  * @param {svgDOMElement} svg - A basic SVG DOM ELEMENT with the usual properties defined
+	  * @param {Number} octaveNumber - The desired number of Octaves (default:1)
+	  * @param {Number} startingOctave - The first note (pitch) of the keyboard 
+	  * @return {svgDOMElement} The DOMElement of a SVG keyboard
+	  */
+	buildSVGOctaves(definedSVG, octaveNumber = 3, startingOctave = 2) {
+		var SVG_NS = 'http://www.w3.org/2000/svg';
+		var XLink_NS = 'http://www.w3.org/1999/xlink';
 		
 		//iterates to use prior defined graphics
-		var useDefsData = [ ["C_key","C",0,0], 
-							["D_key","D",2,WHITE_KEY_AND_SPACEMENT], 
-							["E_key","E",4,2*WHITE_KEY_AND_SPACEMENT], 
-							["F_key","F",5,3*WHITE_KEY_AND_SPACEMENT], 
-							["G_key","G",7,4*WHITE_KEY_AND_SPACEMENT], 
-							["A_key","A",9,5*WHITE_KEY_AND_SPACEMENT], 
-							["B_key","B",11,6*WHITE_KEY_AND_SPACEMENT],
-							["FBK","C#",1,16.1], ["FBK","D#",3,42.65], ["FBK","F#",6,85], ["FBK","G#",8,112.15], ["FBK","A#",10,139.3] ]
+		var useDefsData = [ ["C_key","C",0,0], ["FBK","C#",1,16.1],
+							["D_key","D",2,WHITE_KEY_AND_SPACEMENT], ["FBK","D#",3,42.65],
+							["E_key","E",4,2*WHITE_KEY_AND_SPACEMENT],
+							["F_key","F",5,3*WHITE_KEY_AND_SPACEMENT], ["FBK","F#",6,85], 
+							["G_key","G",7,4*WHITE_KEY_AND_SPACEMENT], ["FBK","G#",8,112.15],
+							["A_key","A",9,5*WHITE_KEY_AND_SPACEMENT], ["FBK","A#",10,139.3],  
+							["B_key","B",11,6*WHITE_KEY_AND_SPACEMENT]]
 		
 		//Add any defined number of octaves
 		for (var i = 0; i < octaveNumber; i++) {
@@ -168,37 +195,55 @@ class SVGKeyboard {
 			feltLine.setAttributeNS(null,'y',0);
 			
 			octave.appendChild(feltLine);
-			svg.appendChild(octave);
+			definedSVG.appendChild(octave);
 		
 		}		
-		return svg;
-	};
-	
-	// TO DO => Chain into constructor
-	// Bind event to produce sound when the key is stricken
-	bindSoundEvents(){
-		
-		//get all keys
-		var keysToAdd = document.querySelectorAll('svg#'+this.id+' use.pianoKey');
-		
-		for (var i = 0; i < keysToAdd.length; i++) {
-			//Add new Key
-			this._keys.push(new Key(keysToAdd[i].attributes.noteId.value));
-		}
+		return definedSVG;
+	}
 
-	}
-	
-	//take a chord or a note and display it
-	highlight(notes) {
-		//we need to check if the display keyboard is enough to display all the keyboard.
-		//Chord and notes implement the method
-		notes.highlight();
-	}
-	
-	// MVC ?
-	zoom(percent) {
+	/**
+	  * Build an SVG DOMElement object to represent a Piano keybaord 
+	  * @param {svgDOMElement} svg - A basic SVG DOM ELEMENT with the usual properties defined
+	  * @param {Number} octaveNumber - The desired number of Octaves (default:1)
+	  * @param {Number} startingOctave - The first note (pitch) of the keyboard 
+	  * @return {svgDOMElement} The DOMElement of a SVG keyboard
+	  */
+	generateKeyboard(octaveNumber = 3, startingOctave = 2, magnify = 2) {
+		
+		//build SVG basic structure	
+		var SVG_NS = 'http://www.w3.org/2000/svg';
+		var XLink_NS = 'http://www.w3.org/1999/xlink';
+		
+		var svg = document.createElementNS(SVG_NS, "svg");
+		svg.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:xlink", "http://www.w3.org/1999/xlink");
+		svg.setAttributeNS(null,'id', this.id);
+		svg.setAttributeNS(null,'class', 'panel');
+		//Here handle the wiewport and size of the top container
+		svg.setAttributeNS(null,'width', magnify*(octaveNumber*OCTAVE_WIDTH));
+		svg.setAttributeNS(null,'height', magnify*OCTAVE_HEIGHT);
+		svg.setAttributeNS(null,'style', 'border: 1px solid black');
+		svg.setAttributeNS(null,'transform',"scale("+magnify+")");
+		
+		//add definitions
+		var definedSVG = this.buildSVGDefs(svg);
+		
+		//then build any number of octaves 
+		return this.buildSVGOctaves(definedSVG,octaveNumber,startingOctave);
 		
 	};
+	
+	playNote(note) {
+		//retrieve id of the key to stroke.
+		var keyID = note.keyNumber;
+		console.log(keyID);
+		console.log(this.keys[keyID]);
+		this.keys[keyID].strike();
+		//note.highlight();
+	}
+	
+	playChord(chord) {
+	
+		note.highlight();
+	}
+
 };
-
-
