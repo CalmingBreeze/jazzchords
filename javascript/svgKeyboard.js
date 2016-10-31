@@ -81,7 +81,7 @@ class SVGKeyboard {
 		C8Key.id = "C8_Key";
 		C8Key.setAttributeNS(null,'width',WHITE_KEY_WIDTH);
 		C8Key.setAttributeNS(null,'height',OCTAVE_HEIGHT);
-		C8Key.setAttributeNS(null,'fill',"white");
+		//C8Key.setAttributeNS(null,'fill',"white");
 		C8Key.setAttributeNS(null,'stroke',"black");
 		C8Key.setAttributeNS(null,'stroke-width',.5);
 		
@@ -90,7 +90,7 @@ class SVGKeyboard {
 		blackKey.id = "FBK";
 		blackKey.setAttributeNS(null,'width',BLACK_KEY_WIDTH);
 		blackKey.setAttributeNS(null,'height',BLACK_KEY_HEIGHT);
-		blackKey.setAttributeNS(null,'fill',"black");
+		//blackKey.setAttributeNS(null,'fill',"black");
 		blackKey.setAttributeNS(null,'stroke',"black");
 		blackKey.setAttributeNS(null,'stroke-width',.5);
 		
@@ -108,7 +108,6 @@ class SVGKeyboard {
 			whiteKey.id = key;
 			whiteKey.setAttributeNS(null,'width',WHITE_KEY_WIDTH);
 			whiteKey.setAttributeNS(null,'points',defaultsKeyData[key]);
-			//whiteKey.setAttributeNS(null,'style',"fill:none; stroke:black");
 			whiteKey.setAttributeNS(null,'stroke-width',.5);
 			defs.appendChild(whiteKey);
 		}
@@ -144,12 +143,18 @@ class SVGKeyboard {
 				
 				use.id = "key"+(entry[2]+(currentOctave*12));
 				use.setAttributeNS(null,'class',"pianoKey");
-				use.setAttributeNS(null,'fill',"white");
+				
+				//Fill the key with the color depending on the class.
+				if (entry[0] == "FBK") {
+					use.setAttributeNS(null,'fill',"black");
+				} else {
+					use.setAttributeNS(null,'fill',"white");
+				}
+				
 				use.setAttributeNS(null,'stroke',"black");
 				use.setAttributeNS(XLink_NS,'xlink:href',"#"+entry[0]);
 				use.setAttributeNS(null,'x',xCoord.toFixed(2));
 				use.setAttributeNS(null,'y',0);
-				
 				//store KeyId 
 				use.setAttribute('noteId',entry[2]+(currentOctave*12));
 				
@@ -169,18 +174,9 @@ class SVGKeyboard {
 		return svg;
 	};
 	
-	//TO DO => Chain into constructor
+	// TO DO => Chain into constructor
 	// Bind event to produce sound when the key is stricken
 	bindSoundEvents(){
-		//var event = new Event('highlight');
-		//var event2 = new Event('clear');
-		//var event3 = new Event('stricken');
-		//var event4 = new Event('released');
-		
-		//var C4 = new Key(48);
-		//var C5 = new Key(49);
-		//C4.bindSoundEvents();
-		//C5.bindSoundEvents();
 		
 		//get all keys
 		var keysToAdd = document.querySelectorAll('svg#'+this.id+' use.pianoKey');
@@ -194,7 +190,6 @@ class SVGKeyboard {
 	
 	//take a chord or a note and display it
 	highlight(notes) {
-		
 		//we need to check if the display keyboard is enough to display all the keyboard.
 		//Chord and notes implement the method
 		notes.highlight();

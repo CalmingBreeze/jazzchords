@@ -22,7 +22,7 @@ class Key {
 			console.log('Releasing :'+this.id);
 		}, false);
 			
-		//Add event stricken
+		//Add event "stricken"
 		keyboardKey.addEventListener('stricken', function (e) {
 			
 			//Bind to the correct Note Sound
