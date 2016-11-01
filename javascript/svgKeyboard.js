@@ -243,7 +243,7 @@ class SVGKeyboard {
 	
 	playChord(chord) {
 	
-		note.highlight();
+		//note.highlight();
 	}
 
 };
