@@ -12,3 +12,31 @@
 .stricken {
 	fill: orange;
 }
+
+#availableNotes {
+	width: 600px;
+	height: 45px;
+	padding: 5px;
+	cursor: pointer;
+}
+
+#availableExtensions {
+	cursor: pointer;
+	width: 640px;
+	height: 70px;
+	padding: 5px;
+}
+
+.chordButton {
+	width: 50px;
+	height: 20px;
+	margin-right: 5px;
+	background-color: rgb(200,200,200);
+	border: 1px solid black;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.float {
+	float : left;
+}

@@ -242,8 +242,9 @@ class SVGKeyboard {
 	}
 	
 	playChord(chord) {
-	
-		//note.highlight();
+		for (var i = 0; i < chord.notes.length; i++) {
+			this.playNote(chord.notes[i]);
+		}
 	}
 
 };

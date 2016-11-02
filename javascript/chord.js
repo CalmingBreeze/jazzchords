@@ -8,9 +8,9 @@ class Chord {
 	
 	constructor(name,inversion = 0, baseOctave = 2) {
 		this._chordName = name;
-		this._inversion = inversion;
-		this._baseOctave = baseOctave;
-		this._notes = [];
+		this.inversion = inversion;
+		this.baseOctave = baseOctave;
+		this.notes = this.getNotesByChordName();
 	};
 	
 	get notes() {
@@ -58,15 +58,15 @@ class Chord {
 	  * @param {string} baseOctave - where do we need to put the first note (default is 2, because C2-C5 is the most optimized wiew for chords)
 	  * @return {array} - array of the composing notes
 	  */
-	getNotesByName() {
-		var notes = [];
+	getNotesByChordName() {
+		var notesArray = [];
 		var chordToCompute = this.chordName;
 		var fundamentalNote = Note.getNoteByNoteName(chordToCompute,this.baseOctave);
 		//first of all, define the fundamental Note
 		
 		//add the fundamental note of the chord
 		//Note.getNoteByNoteName return instanciated note by name
-		notes.push(fundamentalNote);
+		notesArray.push(fundamentalNote);
 		
 		//remove the fundamental from the chord name and the eventual alteration
 		chordToCompute = (fundamentalNote.alteration != 0) ? chordToCompute.substr(2) : chordToCompute.substr(1);
@@ -75,20 +75,47 @@ class Chord {
 		switch (chordToCompute[0]) {
 			
 			case "h":
+				//console.log("enter case h");
 				//C halfdim / Cø / Cm7b5 -> 
-				//Accord dim + 7° mineure
+				//Accord dim + 7° dim
 				//fondamentale, tierce-, quinte-, septième-
-				notes.push(fundamentalNote.third('minor'));//tierce-
-				notes.push(fundamentalNote.fifth('diminished'));//quinte-
-				notes.push(fundamentalNote.seventh());//septième-
-				console.log(final_chord+"half dim");
+				notesArray.push(fundamentalNote.third('minor'));//tierce-
+				notesArray.push(fundamentalNote.fifth('diminished'));//quinte-
+				notesArray.push(fundamentalNote.seventh());//septième-
+				//console.log(fundamentalNote.noteName+"half dim");
 				break;
 				
+			case "b":
+				//C b5
+				//Cmajeur avec quinte dim
+				//fondamentale, tierce, quinte-
+				notesArray.push(fundamentalNote.third());//tierce-
+				notesArray.push(fundamentalNote.fifth('diminished'));//quinte-
+				//console.log(fundamentalNote.noteName+"b5");
+				break;
+			
+			case "d":
+				notesArray.push(fundamentalNote.third());//tierce-
+				notesArray.push(fundamentalNote.fifth('diminished'));//quinte-
+				if (chordToCompute.length == 3) {
+					//Cdim
+					//C majeur full diminué
+					//fondamentale, tierce-, quinte-
+					//console.log(fundamentalNote.noteName+"dim");
+				} else {
+					//Cdim7
+					//C majeur7 full diminué
+					//fondamentale, tierce-, quinte-, septième--
+					notesArray.push(fundamentalNote.seventh('diminshed'));//septième-
+					//console.log(fundamentalNote.noteName+"dim7");
+				}
+				break;
+			
 			default: 
-				console.log("Unknown chord : "+final_chord+chord);
+				console.log("Unknown chord : "+fundamentalNote.noteName+chordToCompute[0]);
 		}
-		
-		//console.log(notes);
+		console.log(notesArray);
+		return notesArray;
 	}
 	
 	

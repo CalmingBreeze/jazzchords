@@ -94,7 +94,7 @@ class Note {
 	  */
 	fifth(intervalType = 'just') {
 		var gap = 7;
-		if (intervalType != 'just') {
+		if (intervalType == 'augmented') {
 			gap++;
 		} else if (intervalType == 'diminished') {
 			gap--;

@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	display_tab('chords');
+	//display_tab('chords');
 
 	//find where to add the keyboard
 	//var hardCodedSvgKeyboard = document.querySelector('#keyboard.panel');
@@ -11,6 +11,7 @@ $(document).ready(function() {
 	//document.body.appendChild(n);
 	//test829.bindSoundEvents();
 	
+	/*
 	var C4_note = new Note(48); //C4
 	var F4sharp_note = new Note(54); //F4#
 	var G5flat_note = new Note(66,-1); //G5b
@@ -18,6 +19,7 @@ $(document).ready(function() {
 	console.log(C4_note.noteName);
 	console.log(F4sharp_note.noteName);
 	console.log(G5flat_note.noteName);
+	*/
 	
 	/*
 	var test4 = new Chord('Cm7', 0);
@@ -27,18 +29,13 @@ $(document).ready(function() {
 	test4.addNote("G");
 	test4.addNote("Bb");
 	console.log(test4);
-	var test5 = new Chord('DbMaj7', 0);
-	console.log(test5);
-	var test6 = new Chord('G#Maj7', 0);
-	console.log(test6);
-	var test7 = new Chord('Gb5', 0);
-	console.log(test7);
-	
 	test4.getNotesByName();
-	test5.getNotesByName();
-	test6.getNotesByName();
-	test7.getNotesByName();
 	*/
+	
+	//var test5 = new Chord('Chalfdim', 0, 3);
+	//test5.getNotesByChordName();
+	//console.log(test5);
+	//test829.playChord(test5);
 	
 	/*
 	//CMaj7
@@ -58,4 +55,15 @@ $(document).ready(function() {
 	
 	//play C7 in Oct4
 	//test829.playChord("C7");
+	
+	//TODO remove DEBUG here
+	//attach button handler
+	function computeChord(){
+		var chordName = document.querySelector("input#debugChord");
+		computedChord = new Chord(chordName.value, 0, 3);
+		test829.playChord(computedChord);
+		
+	}
+	var el = document.querySelector("button#testChordButton"); 
+	el.addEventListener("click", computeChord, false);
 });
