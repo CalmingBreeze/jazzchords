@@ -22,7 +22,7 @@
 
 #availableExtensions {
 	cursor: pointer;
-	width: 640px;
+	width: 700px;
 	height: 70px;
 	padding: 5px;
 }
@@ -35,6 +35,14 @@
 	border: 1px solid black;
 	text-align: center;
 	vertical-align: middle;
+}
+
+.green {
+	background-color: #33FF00;
+}
+
+.red {
+	background-color: red;
 }
 
 .float {

@@ -120,23 +120,32 @@ class Note {
 	  * @return {Note} - return the note augmented by a seventh
 	  */
 	seventh(intervalType = 'minor') {
-		var gap = 10;
-		if (intervalType == 'major') {
-			gap++;
-		} else if (intervalType == 'diminished') {
+		var gap = 11;
+		if (intervalType == 'minor') {
 			gap--;
+		} else if (intervalType == 'diminished') {
+			gap -= 2;
 		}
 		//else do nothing (7th minor)
 		return new Note(this.keyNumber+gap,this.alteration);
 	}
 	
 	/**
-	  * @param {string} intervalType - define if the nineth is major or minor (+14 or +13 pitch)
+	  * @return {Note} - return the note augmented by an octave
+	  */
+	octavify() {
+		return new Note(this.keyNumber+12,this.alteration);
+	}
+	
+	/**
+	  * @param {string} intervalType - define if the nineth is augmented major or minor (+15, +14 or +13 pitch)
 	  * @return {Note} - return the note augmented by a nineth
 	  */
 	nineth(intervalType = 'major') {
 		var gap = 14;
-		if (intervalType != 'minor') {
+		if (intervalType == 'augmented') {
+			gap++;
+		} else if (intervalType == 'minor') {
 			gap--;
 		}
 		return new Note(this.keyNumber+gap,this.alteration);
@@ -155,7 +164,7 @@ class Note {
 	}
 	
 	/**
-	  * @param {string} intervalType - define if the thirteenth is major or minor (+21 or +10 pitch)
+	  * @param {string} intervalType - define if the thirteenth is major or minor (+21 or +20 pitch)
 	  * @return {Note} - return the note augmented by a thirteenth
 	  */
 	thirteenth(intervalType = 'major') {

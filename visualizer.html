@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<title>Jazz-chords learning web app</title>
+		<meta name="description" content="Web-based application to practice and learn jazz chords" />
+		<meta name="author" content="Adrien Limouzin-Lamothe">
+		<meta name="copyright" content="Adrien Limouzin-Lamothe">
+		<meta name="date" content="2015-01-29T21:57:37+00:00">
+		<link rel="stylesheet" type="text/css" href="css/jazzchords.css">
+        <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
+		<script type="text/javascript" src="javascript/jquery-1.11.2.min.js"></script>
+		<script type="text/javascript" src="javascript/chord.js"></script>
+		<script type="text/javascript" src="javascript/note.js"></script>
+		<script type="text/javascript" src="javascript/key.js"></script>
+		<script type="text/javascript" src="javascript/svgKeyboard.js"></script>
+		<script type="text/javascript" src="javascript/onDomReady.js"></script>
+	</head>
+	<body>		
+		<div id="visualizer">
+		
+			<div id="availableNotes">
+				<div class="chordButton float" onclick="$('input#debugChord').val($('input#debugChord').val()+'C');">C</div>
+				<div class="chordButton float" onclick="$('input#debugChord').val($('input#debugChord').val()+'C#');">C#</div>
+				<div class="chordButton float" onclick="$('input#debugChord').val($('input#debugChord').val()+'Db');">Db</div>
+				<div class="chordButton float" onclick="$('input#debugChord').val($('input#debugChord').val()+'D');">D</div>
+				<div class="chordButton float" onclick="$('input#debugChord').val($('input#debugChord').val()+'D#');">D#</div>
+				<div class="chordButton float" onclick="$('input#debugChord').val($('input#debugChord').val()+'Eb');">Eb</div>
+				<div class="chordButton float" onclick="$('input#debugChord').val($('input#debugChord').val()+'E');">E</div>
+				<div class="chordButton float" onclick="$('input#debugChord').val($('input#debugChord').val()+'F');">F</div>
+				<div class="chordButton float" onclick="$('input#debugChord').val($('input#debugChord').val()+'F#');">F#</div>
+				<div class="chordButton float" onclick="$('input#debugChord').val($('input#debugChord').val()+'Gb');">Gb</div>
+				<div class="chordButton float" onclick="$('input#debugChord').val($('input#debugChord').val()+'G');">G</div>
+				<div class="chordButton float" onclick="$('input#debugChord').val($('input#debugChord').val()+'G#');">G#</div>
+				<div class="chordButton float" onclick="$('input#debugChord').val($('input#debugChord').val()+'Ab');">Ab</div>
+				<div class="chordButton float" onclick="$('input#debugChord').val($('input#debugChord').val()+'A');">A</div>
+				<div class="chordButton float" onclick="$('input#debugChord').val($('input#debugChord').val()+'A#');">A#</div>
+				<div class="chordButton float" onclick="$('input#debugChord').val($('input#debugChord').val()+'Bb');">Bb</div>
+				<div class="chordButton float" onclick="$('input#debugChord').val($('input#debugChord').val()+'B');">B</div>
+				<div class="chordButton red float" onclick="$('input#debugChord').val($('input#debugChord').val()+'/');">/</div>
+			</div>
+			
+			<div id="availableExtensions">
+				<div class="chordButton float green" onclick="$('input#debugChord').val($('input#debugChord').val()+'halfdim');">halfdim</div> 
+				<div class="chordButton float green" onclick="$('input#debugChord').val($('input#debugChord').val()+'b5');">b5</div>
+				<div class="chordButton float green" onclick="$('input#debugChord').val($('input#debugChord').val()+'dim');">dim</div>
+				<div class="chordButton float green" onclick="$('input#debugChord').val($('input#debugChord').val()+'dim7');">dim7</div> 
+				<div class="chordButton float green" onclick="$('input#debugChord').val($('input#debugChord').val()+'sus2');">sus2</div>
+				<div class="chordButton float green" onclick="$('input#debugChord').val($('input#debugChord').val()+'sus4');">sus4</div>
+				<div class="chordButton float green" onclick="$('input#debugChord').val($('input#debugChord').val()+'add9');">add9</div>
+				<div class="chordButton float green" onclick="$('input#debugChord').val($('input#debugChord').val()+'aug');">aug</div>
+				<div class="chordButton float green" onclick="$('input#debugChord').val($('input#debugChord').val()+'5');">5</div>
+				<div class="chordButton float green" onclick="$('input#debugChord').val($('input#debugChord').val()+'6');">6</div>
+				<div class="chordButton float green" onclick="$('input#debugChord').val($('input#debugChord').val()+'69');">69</div>
+				<div class="chordButton float green" onclick="$('input#debugChord').val($('input#debugChord').val()+'6/9');">6/9</div> 
+				<div class="chordButton float green" onclick="$('input#debugChord').val($('input#debugChord').val()+'7');">7</div>
+				<div class="chordButton float green" onclick="$('input#debugChord').val($('input#debugChord').val()+'7b5');">7b5</div>
+				<div class="chordButton float green" onclick="$('input#debugChord').val($('input#debugChord').val()+'7b9');">7b9</div>
+				<div class="chordButton float green" onclick="$('input#debugChord').val($('input#debugChord').val()+'7#5');">7#5</div>
+				<div class="chordButton float green" onclick="$('input#debugChord').val($('input#debugChord').val()+'7#9');">7#9</div>
+				<div class="chordButton float green" onclick="$('input#debugChord').val($('input#debugChord').val()+'7sus4');">7sus4</div>
+				<div class="chordButton float green" onclick="$('input#debugChord').val($('input#debugChord').val()+'9');">9</div>
+				<div class="chordButton float green" onclick="$('input#debugChord').val($('input#debugChord').val()+'9b5');">9b5</div>
+				<div class="chordButton float green" onclick="$('input#debugChord').val($('input#debugChord').val()+'9#5');">9#5</div>
+				<div class="chordButton float green" onclick="$('input#debugChord').val($('input#debugChord').val()+'9sus4');">9sus4</div>
+				<div class="chordButton float green" onclick="$('input#debugChord').val($('input#debugChord').val()+'11');">11</div>
+				<div class="chordButton float green" onclick="$('input#debugChord').val($('input#debugChord').val()+'13');">13</div>
+				<div class="chordButton float" onclick="$('input#debugChord').val($('input#debugChord').val()+'m#7');">m#7</div>
+				<div class="chordButton float" onclick="$('input#debugChord').val($('input#debugChord').val()+'minor');">minor</div>
+				<div class="chordButton float" onclick="$('input#debugChord').val($('input#debugChord').val()+'maj7');">maj7</div>
+				<div class="chordButton float" onclick="$('input#debugChord').val($('input#debugChord').val()+'maj9');">maj9</div>
+				<div class="chordButton float" onclick="$('input#debugChord').val($('input#debugChord').val()+'major');">major</div>
+				<div class="chordButton float" onclick="$('input#debugChord').val($('input#debugChord').val()+'m6');">m6</div>
+				<div class="chordButton float" onclick="$('input#debugChord').val($('input#debugChord').val()+'m7b5');">m7b5</div>
+				<div class="chordButton float" onclick="$('input#debugChord').val($('input#debugChord').val()+'m7');">m7</div>
+				<div class="chordButton float" onclick="$('input#debugChord').val($('input#debugChord').val()+'m9');">m9</div>
+				<div class="chordButton float" onclick="$('input#debugChord').val($('input#debugChord').val()+'m11');">m11</div>
+			</div>
+			
+			<form name="testchord" method='post' action="">
+				<input id="debugChord" name="debugChord" type="text" value=""/>
+				
+			</form>
+			<button id="testChordButton" name="testChordButton">Compute chord</button>
+			
+			<p>
+				Examples : C#halfdim, C9sus4<br/>
+				<br/>
+				Currently tested Chords are :<br/> 
+				<br/>
+				_halfdim, _b5, _dim, _dim7, _sus2, _sus4, _add9, _aug, _5 PowerChord, _6, _69, _6/9, _9, _9b5, _9#5, _9sus4,<br/> 
+				slashed chords like C/E, _7b5, _7b9, _7#5, _7#9, _7sus4, _7, _m#7,_minor, _maj7, _maj9, _major, _m6, _m7b5, _m7, _m9, _m11
+				<br/>
+			</p>
+		</div>
+	</body>
+</html>

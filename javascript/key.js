@@ -19,7 +19,7 @@ class Key {
 		//Add event release
 		keyboardKey.addEventListener('released', function () {
 			this.classList.remove("stricken");
-			console.log('Releasing :'+this.id);
+			//console.log('Releasing :'+this.id);
 		}, false);
 			
 		//Add event "stricken"
@@ -35,7 +35,7 @@ class Key {
 			
 			//Add release event on the END of the played sound
 			keySound.addEventListener("ended", function(e) { 
-					console.log('sound ended :'+strickenKey.id); 
+					//console.log('sound ended :'+strickenKey.id); 
 					strickenKey.dispatchEvent(event4); 
 				}, false);
 			//reaction on the strike : Play the note.

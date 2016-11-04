@@ -61,6 +61,7 @@ $(document).ready(function() {
 	function computeChord(){
 		var chordName = document.querySelector("input#debugChord");
 		computedChord = new Chord(chordName.value, 0, 3);
+		chordName.value = "";
 		test829.playChord(computedChord);
 		
 	}

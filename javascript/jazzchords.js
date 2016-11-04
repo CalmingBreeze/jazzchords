@@ -166,8 +166,6 @@ function compute(chord) {
 		chord = chord.substr(1);
 	}
 	
-	
-	
 	//then the fat switch
 	//add fonamental:
 	notes.push(fondamental_value);
