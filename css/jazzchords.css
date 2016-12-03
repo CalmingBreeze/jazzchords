@@ -9,32 +9,12 @@
 	font-weight : bold;
 }
 
+body {
+	padding-top: 70px;
+}
+
 .stricken {
 	fill: orange;
-}
-
-#availableNotes {
-	width: 600px;
-	height: 45px;
-	padding: 5px;
-	cursor: pointer;
-}
-
-#availableExtensions {
-	cursor: pointer;
-	width: 700px;
-	height: 70px;
-	padding: 5px;
-}
-
-.chordButton {
-	width: 50px;
-	height: 20px;
-	margin-right: 5px;
-	background-color: rgb(200,200,200);
-	border: 1px solid black;
-	text-align: center;
-	vertical-align: middle;
 }
 
 .green {
@@ -45,6 +25,25 @@
 	background-color: red;
 }
 
-.float {
-	float : left;
+.flexbox {
+	display: flex;
+	justify-content: space-between;
+}
+
+.verticalFlexbox {
+	display: flex;
+	flex-direction: column;
+}
+
+.flexbox > button.rootKey,
+.verticalFlexbox > button.chordType,
+#alteration-selector > button
+{
+	width: 65px;
+}
+
+#visualKeyboard {
+	margin-left: auto;
+  margin-right: auto;
+	width:1000px;
 }

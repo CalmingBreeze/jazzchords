@@ -24,7 +24,7 @@ class SVGKeyboard {
 	  * @param {Number} octaveNumber - The desired number of octave of the keyboard
 	  * @param {Number} startingOctave - The octave from start the generation (in most case we want C2->C5
 	  */
-	constructor(id, octaveNumber = 3, startingOctave = 2) {
+	constructor(id, targetDiv = 0, octaveNumber = 3, startingOctave = 2) {
 		this.id = id;
 		this.octaveNumber = octaveNumber;
 		this.keys = []; //always legnth of 96 to handle 8 octaves. Key object when it's on the range of the keyboard
@@ -33,7 +33,14 @@ class SVGKeyboard {
 		var myKeyboard = document.importNode(this.generateKeyboard(),true);
 		
 		//Add it to the DOM then bind events
-		document.body.appendChild(myKeyboard);
+		if (targetDiv == 0) {
+			document.body.appendChild(myKeyboard);
+		} else {
+			//Get the targeted elementFromPoint
+			var insertplace = document.querySelector(targetDiv);
+			insertplace.appendChild(myKeyboard)
+		}
+		
 		//SVGElement is now existing in the DOM
 
 		//TO IMPROVE : find a better way to handle represented keys without having to 
@@ -217,7 +224,6 @@ class SVGKeyboard {
 		var svg = document.createElementNS(SVG_NS, "svg");
 		svg.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:xlink", "http://www.w3.org/1999/xlink");
 		svg.setAttributeNS(null,'id', this.id);
-		svg.setAttributeNS(null,'class', 'panel');
 		//Here handle the wiewport and size of the top container
 		svg.setAttributeNS(null,'width', magnify*(octaveNumber*OCTAVE_WIDTH));
 		svg.setAttributeNS(null,'height', magnify*OCTAVE_HEIGHT);

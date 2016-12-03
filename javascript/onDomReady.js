@@ -3,7 +3,7 @@ $(document).ready(function() {
 
 	//find where to add the keyboard
 	//var hardCodedSvgKeyboard = document.querySelector('#keyboard.panel');
-	test829 = new SVGKeyboard('test829');
+	test829 = new SVGKeyboard('test829','#visualKeyboard');
 	
 	//Create and insert it
 	//var n = document.importNode(test829.init(3),true);
@@ -65,6 +65,7 @@ $(document).ready(function() {
 		test829.playChord(computedChord);
 		
 	}
+	
 	var el = document.querySelector("button#testChordButton"); 
 	el.addEventListener("click", computeChord, false);
 });
