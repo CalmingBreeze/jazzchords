@@ -35,11 +35,22 @@ body {
 	flex-direction: column;
 }
 
+#visualizer span {
+	line-height: 34px; /*adapt to bootstrap button height*/
+}
+
 .flexbox > button.rootKey,
 .verticalFlexbox > button.chordType,
-#alteration-selector > button
-{
+#alteration-selector button {
 	width: 65px;
+}
+
+#alteration-selector > span {
+	float: left;
+}
+
+#alteration-selector > div.btn-group {
+		margin-left: 30px;
 }
 
 #visualKeyboard {
