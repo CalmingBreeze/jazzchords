@@ -22,7 +22,8 @@
 		<script type="text/javascript" src="javascript/note.js"></script>
 		<script type="text/javascript" src="javascript/key.js"></script>
 		<script type="text/javascript" src="javascript/svgKeyboard.js"></script>
-		<script type="text/javascript" src="javascript/onDomReady.js"></script>
+		<script type="text/javascript" src="javascript/visualizer.js"></script>
+		<!-- <script type="text/javascript" src="javascript/onDomReady.js"></script> -->
 	</head>
 
 	<body>
@@ -81,8 +82,8 @@
 					<span><strong>Alteration</strong> (Optional)</span>
 					<div class="btn-group" role="group" aria-label="AlterationSelector">
 						<button type="button" class="btn btn-default active">none</button>
-						<button type="button" class="btn btn-default">#</button>
-						<button type="button" class="btn btn-default disabled">b</button>
+						<button type="button" id="sharpen" class="btn btn-default">#</button>
+						<button type="button" id="flatten" class="btn btn-default disabled">b</button>
 					</div>
 				</div>
 			</div>
@@ -96,10 +97,10 @@
 
 				<div class="col-lg-10 flexbox">
 					<div class="verticalFlexbox">
-						<button type="button" class="btn btn-default chordType active">Major</button>
+						<button type="button" class="btn btn-default chordType active">major</button>
 						<button type="button" class="btn btn-default chordType">minor</button>
-						<button type="button" class="btn btn-default chordType">Maj7</button>
-						<button type="button" class="btn btn-default chordType">Maj9</button>
+						<button type="button" class="btn btn-default chordType">maj7</button>
+						<button type="button" class="btn btn-default chordType">maj9</button>
 						<button type="button" class="btn btn-default chordType">add9</button>
 					</div>
 
@@ -163,9 +164,9 @@
 
 			<div class="row">
 				<div class="input-group input-group-lg">
-					<input type="text" class="form-control" aria-describedby="ChordName"value ='CMajor'></input>
+					<input type="text" id="inputedChord" class="form-control" aria-describedby="ChordName" value ='Eb9sus4'></input>
 					<span class="input-group-btn">
-						<button id="testChordButton" class="btn btn-default" type="button">Play it !</button>
+						<button id="validateChord" class="btn btn-default" type="button">Play it !</button>
 					</span>
 				</div>
 			</div>
